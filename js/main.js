@@ -74,12 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     validateField(this);
                 }
             });
-        });
-
-        // Form submission handling
+        });        // Form submission handling
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
             // Hide previous messages
             hideMessages();
             
@@ -92,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             if (!isValid) {
+                e.preventDefault();
                 showError('Please fix the errors above and try again.');
                 return;
             }
@@ -99,8 +96,23 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show loading state
             setLoadingState(true);
             
-            // Submit form data
-            submitForm(new FormData(contactForm));
+            // Check if we're in development mode (localhost)
+            const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            
+            if (isDevelopment) {
+                // In development, prevent default and simulate
+                e.preventDefault();
+                setTimeout(() => {
+                    showSuccess();
+                    contactForm.reset();
+                    clearFormData();
+                    setLoadingState(false);
+                }, 1500);
+            } else {
+                // In production, let Netlify handle the form submission naturally
+                // Don't prevent default - let the form submit normally
+                clearFormData();
+            }
         });
           // Check for success parameter in URL (after form submission)
         const urlParams = new URLSearchParams(window.location.search);
@@ -246,42 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         return isValid;
-    }    function submitForm(formData) {
-        // Check if we're in development mode (localhost)
-        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        
-        if (isDevelopment) {
-            // In development, simulate form submission
-            setTimeout(() => {
-                showSuccess();
-                contactForm.reset();
-                clearFormData();
-                setLoadingState(false);
-            }, 1500);
-        } else {
-            // In production, use Netlify's form handling
-            fetch(contactForm.action, {
-                method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Netlify will redirect to success page
-                    window.location.href = '/success.html';
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showError('Something went wrong. Please try again or email me directly.');
-                setLoadingState(false);
-            });
-        }
-    }
-
-    function setLoadingState(loading) {
+    }    function setLoadingState(loading) {
         if (loading) {
             submitButton.disabled = true;
             submitText.textContent = 'Sending...';

@@ -52,7 +52,15 @@
   status = 200
 
 # Form handling - Netlify will automatically handle forms with netlify attribute
-# No additional configuration needed for forms
+# Configure form notifications and settings
+[template.environment]
+  FORM_NOTIFICATION_EMAIL = "elefesramones51@gmail.com"
+
+# Custom form success redirects
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
 
 # 404 page redirect
 [[redirects]]
