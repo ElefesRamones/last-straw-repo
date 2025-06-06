@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form Test</title>
+</head>
+<body>
+    <!-- Simple test form for Netlify -->
+    <form name="contact" method="POST" data-netlify="true" action="/success.html">
+        <input type="hidden" name="form-name" value="contact" />
+        <div>
+            <label>Name: <input type="text" name="name" required /></label>
+        </div>
+        <div>
+            <label>Email: <input type="email" name="email" required /></label>
+        </div>
+        <div>
+            <label>Message: <textarea name="message" required></textarea></label>
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</body>
+</html>

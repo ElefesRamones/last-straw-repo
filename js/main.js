@@ -379,3 +379,131 @@ function lazyLoadImages() {
 
 // Initialize lazy loading when DOM is ready
 document.addEventListener('DOMContentLoaded', lazyLoadImages);
+
+// Dynamic subject line generation
+    function updateSubjectLine() {
+        const nameField = document.getElementById('name');
+        const budgetField = document.getElementById('budget');
+        const timelineField = document.getElementById('timeline');
+        const subjectField = document.getElementById('dynamic-subject');
+        
+        if (nameField && subjectField) {
+            let subject = 'New Portfolio Inquiry';
+            const name = nameField.value.trim();
+            
+            if (name) {
+                subject = `Portfolio Inquiry from ${name}`;
+            }
+            
+            // Add budget info if selected
+            if (budgetField && budgetField.value) {
+                const budgetText = budgetField.options[budgetField.selectedIndex].text;
+                subject += ` (Budget: ${budgetText})`;
+            }
+            
+            // Add timeline info if selected
+            if (timelineField && timelineField.value) {
+                const timelineText = timelineField.options[timelineField.selectedIndex].text;
+                subject += ` - ${timelineText}`;
+            }
+            
+            subjectField.value = subject;
+        }
+    }
+
+    // Update subject line when form fields change
+    if (contactForm) {
+        const nameField = document.getElementById('name');
+        const budgetField = document.getElementById('budget');
+        const timelineField = document.getElementById('timeline');
+        
+        [nameField, budgetField, timelineField].forEach(field => {
+            if (field) {
+                field.addEventListener('change', updateSubjectLine);
+                field.addEventListener('blur', updateSubjectLine);
+            }
+        });
+    }
+
+    // Dynamic subject line generation for unique emails
+        function updateDynamicSubject() {
+            const nameField = document.getElementById('name');
+            const budgetField = document.getElementById('budget');
+            const timelineField = document.getElementById('timeline');
+            const subjectField = document.getElementById('dynamic-subject');
+            
+            if (subjectField) {
+                const name = nameField ? nameField.value.trim() : '';
+                const budget = budgetField ? budgetField.value : '';
+                const timeline = timelineField ? timelineField.value : '';
+                
+                // Create unique timestamp
+                const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+                
+                // Build dynamic subject
+                let subject = 'Portfolio Inquiry';
+                
+                if (name) {
+                    subject += ` from ${name}`;
+                }
+                
+                if (budget && budget !== '') {
+                    const budgetLabels = {
+                        'under-500': 'Under $500',
+                        '500-1000': '$500-1K',
+                        '1000-2500': '$1K-2.5K',
+                        '2500-5000': '$2.5K-5K',
+                        'over-5000': '$5K+',
+                        'discuss': 'Budget TBD'
+                    };
+                    subject += ` [${budgetLabels[budget] || budget}]`;
+                }
+                
+                if (timeline && timeline !== '') {
+                    const timelineLabels = {
+                        'asap': 'URGENT',
+                        '1-week': '1 Week',
+                        '2-weeks': '2 Weeks',
+                        '1-month': '1 Month',
+                        'flexible': 'Flexible'
+                    };
+                    subject += ` (${timelineLabels[timeline] || timeline})`;
+                }
+                
+                // Add timestamp to ensure uniqueness
+                subject += ` - ${timestamp}`;
+                
+                subjectField.value = subject;
+            }
+        }
+
+        // Update subject when relevant fields change
+        const subjectTriggerFields = ['name', 'budget', 'timeline'];
+        subjectTriggerFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('input', updateDynamicSubject);
+                field.addEventListener('change', updateDynamicSubject);
+            }
+        });        // Update subject before form submission
+        contactForm.addEventListener('submit', function() {
+            updateDynamicSubject();
+            
+            // Generate unique inquiry ID
+            const inquiryIdField = document.getElementById('inquiry-id');
+            const submissionTimeField = document.getElementById('submission-time');
+            const timezoneField = document.getElementById('client-timezone');
+            
+            if (inquiryIdField) {
+                const uniqueId = 'INQ-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                inquiryIdField.value = uniqueId;
+            }
+            
+            if (submissionTimeField) {
+                submissionTimeField.value = new Date().toISOString();
+            }
+            
+            if (timezoneField) {
+                timezoneField.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            }
+        });
