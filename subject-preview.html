@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Contact Form - Subject Line Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Enhanced Anti-Threading Subject Preview</h1>
+        
+        <p class="text-gray-600 mb-6">
+            This form shows you exactly what subject lines will be generated with the new anti-threading system. 
+            <strong>No emails will be sent from localhost</strong> - this is just to preview the enhanced system.
+        </p>
+        
+        <div class="space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                <input type="text" id="name" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                       placeholder="Enter your name">
+            </div>
+            
+            <div>
+                <label for="budget" class="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
+                <select id="budget" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="">Select budget range</option>
+                    <option value="under-500">Under $500</option>
+                    <option value="500-1000">$500 - $1,000</option>
+                    <option value="1000-2500">$1,000 - $2,500</option>
+                    <option value="2500-5000">$2,500 - $5,000</option>
+                    <option value="over-5000">$5,000+</option>
+                    <option value="discuss">Let's discuss</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="timeline" class="block text-sm font-medium text-gray-700 mb-2">Project Timeline</label>
+                <select id="timeline" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="">Select timeline</option>
+                    <option value="asap">ASAP</option>
+                    <option value="1-week">1 Week</option>
+                    <option value="2-weeks">2 Weeks</option>
+                    <option value="1-month">1 Month</option>
+                    <option value="flexible">Flexible</option>
+                </select>
+            </div>
+            
+            <button id="generate-btn" 
+                    class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                Generate Subject Line Preview
+            </button>
+        </div>
+        
+        <div id="preview-section" class="mt-8 p-6 bg-gray-50 rounded-lg hidden">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Generated Subject Line:</h3>
+            <div id="subject-preview" class="p-4 bg-white border rounded font-mono text-sm break-all"></div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mt-6 mb-4">Hidden Form Data:</h3>
+            <div id="data-preview" class="space-y-2 text-sm"></div>
+            
+            <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded">
+                <p class="text-blue-800">
+                    <strong>✅ Anti-Threading Features:</strong><br>
+                    • Random base subject pattern<br>
+                    • Unique session ID (#)<br>
+                    • High-precision microtime (@)<br>
+                    • Random hash reference (REF-)<br>
+                    • Browser fingerprint data<br>
+                    • Multiple unique identifiers
+                </p>
+            </div>
+        </div>
+        
+        <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded">
+            <h3 class="text-lg font-semibold text-yellow-800 mb-2">📧 To Test Real Email Sending:</h3>
+            <ol class="text-yellow-700 space-y-1 text-sm">
+                <li>1. Push these changes to your GitHub repository</li>
+                <li>2. Let Netlify auto-deploy the updates</li>
+                <li>3. Visit your live site: <strong>ramonescapulong.com/contact.html</strong></li>
+                <li>4. Submit multiple test forms</li>
+                <li>5. Check Gmail - each should appear as separate emails</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced subject generation system (same as production)
+        function generateEnhancedSubject() {
+            const nameField = document.getElementById('name');
+            const budgetField = document.getElementById('budget');
+            const timelineField = document.getElementById('timeline');
+            
+            const name = nameField.value.trim();
+            const budget = budgetField.value;
+            const timeline = timelineField.value;
+            
+            // Create extremely unique identifiers
+            const now = new Date();
+            const microtime = now.getTime() + '.' + (performance.now() * 1000).toFixed(0);
+            const randomHash = Math.random().toString(36).substr(2, 12) + Math.random().toString(36).substr(2, 8);
+            const sessionId = 'SES-' + Date.now() + '-' + Math.random().toString(36).substr(2, 16);
+            
+            // Rotating subject patterns
+            const subjectPatterns = [
+                'New Portfolio Request',
+                'Creative Services Inquiry', 
+                'Design Project Request',
+                'Portfolio Contact Form',
+                'Client Inquiry Submission',
+                'Project Request Form',
+                'Design Services Contact',
+                'Creative Work Request'
+            ];
+            
+            const baseSubject = subjectPatterns[Math.floor(Math.random() * subjectPatterns.length)];
+            
+            // Build subject with enhanced uniqueness
+            let subject = baseSubject;
+            
+            if (name) {
+                subject += ` - ${name}`;
+            }
+            
+            if (budget) {
+                const budgetLabels = {
+                    'under-500': 'Under$500',
+                    '500-1000': '$500-1K',
+                    '1000-2500': '$1K-2.5K',
+                    '2500-5000': '$2.5K-5K',
+                    'over-5000': '$5K+',
+                    'discuss': 'Budget-TBD'
+                };
+                subject += ` [${budgetLabels[budget] || budget}]`;
+            }
+            
+            if (timeline) {
+                const timelineLabels = {
+                    'asap': 'URGENT',
+                    '1-week': '1Week',
+                    '2-weeks': '2Weeks',
+                    '1-month': '1Month',
+                    'flexible': 'FlexTime'
+                };
+                subject += ` (${timelineLabels[timeline] || timeline})`;
+            }
+            
+            // Add unique identifiers
+            subject += ` #${sessionId.substr(-16)}`;
+            subject += ` @${microtime}`;
+            subject += ` REF-${randomHash}`;
+            
+            // Generate additional hidden data
+            const inquiryId = 'INQ-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            const browserFingerprint = [
+                navigator.userAgent.slice(-20),
+                screen.width + 'x' + screen.height,
+                new Date().getTimezoneOffset(),
+                Math.random().toString(36).substr(2, 8)
+            ].join('-');
+            
+            return {
+                subject: subject,
+                inquiryId: inquiryId,
+                sessionId: sessionId,
+                microtime: microtime,
+                randomHash: randomHash,
+                browserFingerprint: browserFingerprint,
+                submissionTime: now.toISOString(),
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            };
+        }
+        
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const data = generateEnhancedSubject();
+            
+            // Show preview section
+            document.getElementById('preview-section').classList.remove('hidden');
+            
+            // Display subject
+            document.getElementById('subject-preview').textContent = data.subject;
+            
+            // Display hidden data
+            const dataPreview = document.getElementById('data-preview');
+            dataPreview.innerHTML = `
+                <div><strong>Inquiry ID:</strong> ${data.inquiryId}</div>
+                <div><strong>Session ID:</strong> ${data.sessionId}</div>
+                <div><strong>Microtime:</strong> ${data.microtime}</div>
+                <div><strong>Random Hash:</strong> ${data.randomHash}</div>
+                <div><strong>Browser Fingerprint:</strong> ${data.browserFingerprint}</div>
+                <div><strong>Submission Time:</strong> ${data.submissionTime}</div>
+                <div><strong>Client Timezone:</strong> ${data.timezone}</div>
+            `;
+            
+            // Scroll to preview
+            document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
