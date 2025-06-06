@@ -1,0 +1,40 @@
+<!-- LOGO IMPLEMENTATION EXAMPLE -->
+<!-- Replace the current text-based navigation with your logo -->
+
+<!-- CURRENT (Text-based): -->
+<div class="flex-shrink-0">
+    <a href="/" class="text-xl font-semibold text-gray-900">Ramones</a>
+</div>
+
+<!-- NEW (Logo-based): -->
+<div class="flex-shrink-0">
+    <a href="/" class="flex items-center">
+        <img src="/assets/images/logo/logo.svg" 
+             alt="Ramones Capulong" 
+             class="h-8 w-auto">
+    </a>
+</div>
+
+<!-- ALTERNATIVE: Logo + Text combination -->
+<div class="flex-shrink-0">
+    <a href="/" class="flex items-center space-x-3">
+        <img src="/assets/images/logo/logo.svg" 
+             alt="Ramones Capulong" 
+             class="h-8 w-8">
+        <span class="text-xl font-semibold text-gray-900 hidden sm:block">Ramones</span>
+    </a>
+</div>
+
+<!-- RESPONSIVE: Different logos for different screen sizes -->
+<div class="flex-shrink-0">
+    <a href="/" class="flex items-center">
+        <!-- Mobile: Icon only -->
+        <img src="/assets/images/logo/logo-icon.svg" 
+             alt="Ramones Capulong" 
+             class="h-8 w-8 sm:hidden">
+        <!-- Desktop: Full logo -->
+        <img src="/assets/images/logo/logo.svg" 
+             alt="Ramones Capulong" 
+             class="h-8 w-auto hidden sm:block">
+    </a>
+</div>
