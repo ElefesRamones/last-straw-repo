@@ -52,33 +52,276 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-    });
+    });    // Enhanced Contact Form Handling
+    const contactForm = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-btn');
+    const submitText = document.getElementById('submit-text');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
 
-    // Form submission handling (basic validation)
-    const contactForm = document.querySelector('form[name="contact"]');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            const name = this.querySelector('input[name="name"]').value.trim();
-            const email = this.querySelector('input[name="email"]').value.trim();
-            const message = this.querySelector('textarea[name="message"]').value.trim();
+        // Real-time form validation
+        const inputs = contactForm.querySelectorAll('input[required], textarea[required]');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
             
-            if (!name || !email || !message) {
-                e.preventDefault();
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Basic email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                e.preventDefault();
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            // If validation passes, show success message
-            // Note: This will be handled by Netlify in production
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
         });
+
+        // Form submission handling
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Hide previous messages
+            hideMessages();
+            
+            // Validate all fields
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+            
+            if (!isValid) {
+                showError('Please fix the errors above and try again.');
+                return;
+            }
+            
+            // Show loading state
+            setLoadingState(true);
+            
+            // Submit form data
+            submitForm(new FormData(contactForm));
+        });
+          // Check for success parameter in URL (after form submission)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            showSuccess();
+            // Clear form
+            contactForm.reset();
+            clearFormData();
+            // Remove success parameter from URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+
+    // Character counter for message field
+    const messageField = document.getElementById('message');
+    if (messageField) {
+        const maxLength = 1000;
+        messageField.setAttribute('maxlength', maxLength);
+        
+        // Create character counter
+        const counterDiv = document.createElement('div');
+        counterDiv.className = 'text-sm text-gray-500 mt-1 text-right';
+        counterDiv.innerHTML = `<span id="char-count">0</span>/${maxLength} characters`;
+        messageField.parentNode.appendChild(counterDiv);
+        
+        const charCount = document.getElementById('char-count');
+        
+        messageField.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCount.textContent = currentLength;
+            
+            // Change color when approaching limit
+            if (currentLength > maxLength * 0.9) {
+                charCount.className = 'text-red-600 font-medium';
+            } else if (currentLength > maxLength * 0.8) {
+                charCount.className = 'text-yellow-600 font-medium';
+            } else {
+                charCount.className = '';
+            }
+        });
+    }
+
+    // Auto-save form data to localStorage
+    function saveFormData() {
+        if (contactForm) {
+            const formData = new FormData(contactForm);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'bot-field' && key !== 'form-name') {
+                    data[key] = value;
+                }
+            }
+            localStorage.setItem('contactFormData', JSON.stringify(data));
+        }
+    }
+
+    function loadFormData() {
+        if (contactForm) {
+            const savedData = localStorage.getItem('contactFormData');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    Object.entries(data).forEach(([key, value]) => {
+                        const field = contactForm.querySelector(`[name="${key}"]`);
+                        if (field && value) {
+                            field.value = value;
+                        }
+                    });
+                } catch (error) {
+                    console.log('Could not load saved form data');
+                }
+            }
+        }
+    }
+
+    function clearFormData() {
+        localStorage.removeItem('contactFormData');
+    }
+
+    // Auto-save on input changes
+    if (contactForm) {
+        inputs.forEach(input => {
+            input.addEventListener('input', saveFormData);
+        });
+        
+        // Load saved data on page load
+        loadFormData();
+        
+        // Clear saved data on successful submission
+        contactForm.addEventListener('submit', function() {
+            clearFormData();
+        });
+    }
+
+    function validateField(field) {
+        const value = field.value.trim();
+        let isValid = true;
+        let errorMsg = '';
+
+        // Remove existing error styling
+        field.classList.remove('error', 'border-red-300', 'focus:ring-red-500');
+        const existingError = field.parentNode.querySelector('.error-text');
+        if (existingError) {
+            existingError.remove();
+        }
+
+        // Required field validation
+        if (field.hasAttribute('required') && !value) {
+            isValid = false;
+            errorMsg = 'This field is required.';
+        }
+        
+        // Email validation
+        else if (field.type === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                isValid = false;
+                errorMsg = 'Please enter a valid email address.';
+            }
+        }
+        
+        // Name validation (minimum 2 characters)
+        else if (field.name === 'name' && value && value.length < 2) {
+            isValid = false;
+            errorMsg = 'Name must be at least 2 characters long.';
+        }
+        
+        // Message validation (minimum 10 characters)
+        else if (field.name === 'message' && value && value.length < 10) {
+            isValid = false;
+            errorMsg = 'Message must be at least 10 characters long.';
+        }
+
+        if (!isValid) {
+            // Add error styling
+            field.classList.add('error', 'border-red-300', 'focus:ring-red-500');
+            
+            // Add error message
+            const errorElement = document.createElement('p');
+            errorElement.className = 'error-text text-red-600 text-sm mt-1';
+            errorElement.textContent = errorMsg;
+            field.parentNode.appendChild(errorElement);
+        }
+
+        return isValid;
+    }    function submitForm(formData) {
+        // Check if we're in development mode (localhost)
+        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        
+        if (isDevelopment) {
+            // In development, simulate form submission
+            setTimeout(() => {
+                showSuccess();
+                contactForm.reset();
+                clearFormData();
+                setLoadingState(false);
+            }, 1500);
+        } else {
+            // In production, use Netlify's form handling
+            fetch(contactForm.action, {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Netlify will redirect to success page
+                    window.location.href = '/success.html';
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('Something went wrong. Please try again or email me directly.');
+                setLoadingState(false);
+            });
+        }
+    }
+
+    function setLoadingState(loading) {
+        if (loading) {
+            submitButton.disabled = true;
+            submitText.textContent = 'Sending...';
+            loadingSpinner.classList.remove('hidden');
+        } else {
+            submitButton.disabled = false;
+            submitText.textContent = 'Send Message';
+            loadingSpinner.classList.add('hidden');
+        }
+    }
+
+    function showSuccess() {
+        hideMessages();
+        successMessage.classList.remove('hidden');
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            successMessage.classList.add('hidden');
+        }, 5000);
+    }
+
+    function showError(message) {
+        hideMessages();
+        const errorText = errorMessage.querySelector('p');
+        if (errorText) {
+            errorText.textContent = message;
+        }
+        errorMessage.classList.remove('hidden');
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-hide after 7 seconds
+        setTimeout(() => {
+            errorMessage.classList.add('hidden');
+        }, 7000);
+    }
+
+    function hideMessages() {
+        successMessage.classList.add('hidden');
+        errorMessage.classList.add('hidden');
     }
 
     // Add scroll effect to navigation
