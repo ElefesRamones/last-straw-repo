@@ -423,9 +423,7 @@ document.addEventListener('DOMContentLoaded', lazyLoadImages);
                 field.addEventListener('blur', updateSubjectLine);
             }
         });
-    }
-
-    // Dynamic subject line generation for unique emails
+    }    // Dynamic subject line generation for unique emails - ANTI-THREADING SYSTEM
         function updateDynamicSubject() {
             const nameField = document.getElementById('name');
             const budgetField = document.getElementById('budget');
@@ -437,24 +435,42 @@ document.addEventListener('DOMContentLoaded', lazyLoadImages);
                 const budget = budgetField ? budgetField.value : '';
                 const timeline = timelineField ? timelineField.value : '';
                 
-                // Create unique timestamp
-                const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+                // Create extremely unique identifiers to break Gmail threading
+                const now = new Date();
+                const timestamp = now.toISOString().slice(0, 19).replace(/:/g, '-');
+                const microtime = now.getTime() + '.' + (performance.now() * 1000).toFixed(0);
+                const randomHash = Math.random().toString(36).substr(2, 12) + Math.random().toString(36).substr(2, 8);
+                const sessionId = Math.random().toString(36).substr(2, 16);
                 
-                // Build dynamic subject
-                let subject = 'Portfolio Inquiry';
+                // Rotating subject line patterns to prevent any pattern matching
+                const subjectPatterns = [
+                    'New Portfolio Request',
+                    'Creative Services Inquiry', 
+                    'Design Project Request',
+                    'Portfolio Contact Form',
+                    'Client Inquiry Submission',
+                    'Project Request Form',
+                    'Design Services Contact',
+                    'Creative Work Request'
+                ];
+                
+                const baseSubject = subjectPatterns[Math.floor(Math.random() * subjectPatterns.length)];
+                
+                // Build highly unique subject with multiple differentiating factors
+                let subject = `${baseSubject}`;
                 
                 if (name) {
-                    subject += ` from ${name}`;
+                    subject += ` - ${name}`;
                 }
                 
                 if (budget && budget !== '') {
                     const budgetLabels = {
-                        'under-500': 'Under $500',
+                        'under-500': 'Under$500',
                         '500-1000': '$500-1K',
                         '1000-2500': '$1K-2.5K',
                         '2500-5000': '$2.5K-5K',
                         'over-5000': '$5K+',
-                        'discuss': 'Budget TBD'
+                        'discuss': 'Budget-TBD'
                     };
                     subject += ` [${budgetLabels[budget] || budget}]`;
                 }
@@ -462,16 +478,18 @@ document.addEventListener('DOMContentLoaded', lazyLoadImages);
                 if (timeline && timeline !== '') {
                     const timelineLabels = {
                         'asap': 'URGENT',
-                        '1-week': '1 Week',
-                        '2-weeks': '2 Weeks',
-                        '1-month': '1 Month',
-                        'flexible': 'Flexible'
+                        '1-week': '1Week',
+                        '2-weeks': '2Weeks',
+                        '1-month': '1Month',
+                        'flexible': 'FlexTime'
                     };
                     subject += ` (${timelineLabels[timeline] || timeline})`;
                 }
                 
-                // Add timestamp to ensure uniqueness
-                subject += ` - ${timestamp}`;
+                // Add multiple unique identifiers to break any threading
+                subject += ` #${sessionId}`;
+                subject += ` @${microtime}`;
+                subject += ` REF-${randomHash}`;
                 
                 subjectField.value = subject;
             }
@@ -489,10 +507,28 @@ document.addEventListener('DOMContentLoaded', lazyLoadImages);
         contactForm.addEventListener('submit', function() {
             updateDynamicSubject();
             
-            // Generate unique inquiry ID
+            // Generate multiple unique identifiers for anti-threading
+            const now = new Date();
+            const microtime = now.getTime() + '.' + (performance.now() * 1000).toFixed(0);
+            const randomHash = Math.random().toString(36).substr(2, 12) + Math.random().toString(36).substr(2, 8);
+            const sessionId = 'SES-' + Date.now() + '-' + Math.random().toString(36).substr(2, 16);
+            
+            // Browser fingerprint for additional uniqueness
+            const browserFingerprint = [
+                navigator.userAgent.slice(-20),
+                screen.width + 'x' + screen.height,
+                new Date().getTimezoneOffset(),
+                Math.random().toString(36).substr(2, 8)
+            ].join('-');
+            
+            // Populate all anti-threading fields
             const inquiryIdField = document.getElementById('inquiry-id');
             const submissionTimeField = document.getElementById('submission-time');
             const timezoneField = document.getElementById('client-timezone');
+            const sessionIdField = document.getElementById('session-id');
+            const microtimeField = document.getElementById('microtime-stamp');
+            const randomHashField = document.getElementById('random-hash');
+            const browserFingerprintField = document.getElementById('browser-fingerprint');
             
             if (inquiryIdField) {
                 const uniqueId = 'INQ-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
@@ -505,5 +541,21 @@ document.addEventListener('DOMContentLoaded', lazyLoadImages);
             
             if (timezoneField) {
                 timezoneField.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            }
+            
+            if (sessionIdField) {
+                sessionIdField.value = sessionId;
+            }
+            
+            if (microtimeField) {
+                microtimeField.value = microtime;
+            }
+            
+            if (randomHashField) {
+                randomHashField.value = randomHash;
+            }
+            
+            if (browserFingerprintField) {
+                browserFingerprintField.value = browserFingerprint;
             }
         });

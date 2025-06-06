@@ -105,12 +105,21 @@
                                 </svg>
                                 <p class="text-red-800 font-medium">Something went wrong. Please try again or email me directly.</p>
                             </div>
-                        </div>                        <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html" class="space-y-6">                            <input type="hidden" name="form-name" value="contact" />
+                        </div>                        <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html" class="space-y-6">                            <!-- Standard Netlify fields -->
+                            <input type="hidden" name="form-name" value="contact" />
                             <input type="hidden" name="subject" id="dynamic-subject" value="New Portfolio Inquiry" />
+                            
+                            <!-- Anti-threading fields - Multiple unique identifiers to break Gmail conversation grouping -->
                             <input type="hidden" name="inquiry-id" id="inquiry-id" value="" />
                             <input type="hidden" name="submission-time" id="submission-time" value="" />
                             <input type="hidden" name="client-timezone" id="client-timezone" value="" />
+                            <input type="hidden" name="session-id" id="session-id" value="" />
+                            <input type="hidden" name="microtime-stamp" id="microtime-stamp" value="" />
+                            <input type="hidden" name="random-hash" id="random-hash" value="" />
+                            <input type="hidden" name="browser-fingerprint" id="browser-fingerprint" value="" />
+                            <input type="hidden" name="form-version" id="form-version" value="v2.1-anti-thread" />
                             <input type="hidden" name="page-url" value="Portfolio Contact Form" />
+                            
                             <!-- Honeypot field for spam protection -->
                             <div class="hidden">
                                 <label>Don't fill this out: <input name="bot-field" /></label>
