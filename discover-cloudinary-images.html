@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Cloudinary Images - Grind Theory Folder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-8">
+    <div class="max-w-6xl mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Cloudinary Image Discovery</h1>
+        <p class="text-gray-600 mb-8">This tool helps you find all images in your "Grind theory webp" Cloudinary folder. Try different naming patterns to discover your images.</p>
+        
+        <div class="bg-white rounded-lg p-6 shadow-md mb-8">
+            <h2 class="text-xl font-semibold mb-4">Common Image Naming Patterns to Test:</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-medium mb-2">Folder-based paths:</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Grind theory webp/image-name</li>
+                        <li>• Grind_theory_webp/image-name</li>
+                        <li>• grind-theory-webp/image-name</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium mb-2">Common image names:</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• homepage, landing, main</li>
+                        <li>• mobile, responsive, tablet</li>
+                        <li>• branding, logo, colors</li>
+                        <li>• wireframe, sketch, mockup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="image-grid">
+            <!-- Images will be populated by JavaScript -->
+        </div>
+        
+        <div class="mt-8 bg-white rounded-lg p-6 shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Manual Test:</h2>
+            <div class="flex gap-2 mb-4">
+                <input 
+                    type="text" 
+                    id="manual-test-input" 
+                    placeholder="Enter image path (e.g., Grind theory webp/your-image-name)"
+                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                <button 
+                    onclick="testManualImage()" 
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                    Test Image
+                </button>
+            </div>
+            <div id="manual-test-result"></div>
+        </div>
+
+        <div class="mt-8 bg-green-50 border border-green-200 rounded-lg p-6">
+            <h2 class="text-lg font-semibold text-green-800 mb-2">Working Images Found:</h2>
+            <div id="working-images" class="text-sm text-green-700">
+                <p>Images that load successfully will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test various folder and naming combinations
+        const testPatterns = [
+            // Different folder name formats
+            'Grind theory webp/mockup1',
+            'Grind theory webp/mockup2', 
+            'Grind theory webp/mockup3',
+            'Grind theory webp/homepage',
+            'Grind theory webp/landing',
+            'Grind theory webp/main',
+            'Grind theory webp/mobile',
+            'Grind theory webp/desktop',
+            'Grind theory webp/branding',
+            'Grind theory webp/logo',
+            'Grind theory webp/wireframe',
+            'Grind theory webp/process',
+            
+            // Underscore version
+            'Grind_theory_webp/mockup1',
+            'Grind_theory_webp/mockup2',
+            'Grind_theory_webp/homepage',
+            'Grind_theory_webp/mobile',
+            
+            // Dash version
+            'grind-theory-webp/mockup1',
+            'grind-theory-webp/mockup2',
+            'grind-theory-webp/homepage',
+            
+            // Known working image
+            'Mockup-one-web_uysett',
+            
+            // Try some variations of the known working image name
+            'Grind theory webp/Mockup-one-web',
+            'Grind theory webp/Mockup-two-web',
+            'Grind theory webp/Mockup-three-web',
+            'Grind theory webp/mockup-one-web',
+            'Grind theory webp/mockup-two-web',
+        ];
+
+        const workingImages = [];
+
+        function createImageTest(imagePath, index) {
+            const cloudinaryUrl = `https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_300,h_200,q_auto,f_auto/${imagePath}`;
+            
+            const div = document.createElement('div');
+            div.className = 'bg-white rounded-lg p-4 shadow-md';
+            
+            div.innerHTML = `
+                <div class="mb-3">
+                    <h3 class="font-semibold text-gray-900">Test ${index + 1}</h3>
+                    <p class="text-sm text-gray-600 break-all">${imagePath}</p>
+                </div>
+                <div class="relative">
+                    <img 
+                        src="${cloudinaryUrl}" 
+                        alt="Test image ${index + 1}"
+                        class="w-full h-32 object-cover rounded border-2 border-gray-200"
+                        onload="showSuccess(this, '${imagePath}')"
+                        onerror="showError(this)"
+                    >
+                    <div class="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center status-indicator">
+                        <span class="text-sm">⏳</span>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        function showSuccess(img, imagePath) {
+            const indicator = img.parentElement.querySelector('.status-indicator');
+            indicator.innerHTML = '<span class="text-green-600 font-bold">✓</span>';
+            indicator.className = 'absolute top-2 right-2 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center status-indicator';
+            
+            // Add to working images list
+            workingImages.push(imagePath);
+            updateWorkingImagesList();
+        }
+
+        function showError(img) {
+            const indicator = img.parentElement.querySelector('.status-indicator');
+            indicator.innerHTML = '<span class="text-red-600 font-bold">✗</span>';
+            indicator.className = 'absolute top-2 right-2 w-6 h-6 bg-red-100 rounded-full flex items-center justify-center status-indicator';
+            img.style.opacity = '0.3';
+        }
+
+        function updateWorkingImagesList() {
+            const workingDiv = document.getElementById('working-images');
+            if (workingImages.length === 0) {
+                workingDiv.innerHTML = '<p>No working images found yet...</p>';
+                return;
+            }
+            
+            const list = workingImages.map(path => `
+                <div class="mb-2 p-2 bg-white rounded border">
+                    <strong>✓ ${path}</strong><br>
+                    <code class="text-xs">id: '${path}'</code>
+                </div>
+            `).join('');
+            
+            workingDiv.innerHTML = `
+                <p class="mb-3 font-medium">${workingImages.length} working image(s) found:</p>
+                ${list}
+                <div class="mt-4 p-3 bg-blue-50 rounded">
+                    <strong>Copy this for your cloudinary-config.js:</strong><br>
+                    <code class="text-xs block mt-2 p-2 bg-white rounded">${generateConfigCode()}</code>
+                </div>
+            `;
+        }
+
+        function generateConfigCode() {
+            return workingImages.map((path, index) => 
+                `{
+    id: '${path}',
+    alt: 'Grind Theory - Image ${index + 1}',
+    description: 'Description for ${path}'
+},`
+            ).join('\n');
+        }
+
+        function testManualImage() {
+            const input = document.getElementById('manual-test-input');
+            const resultDiv = document.getElementById('manual-test-result');
+            const imagePath = input.value.trim();
+            
+            if (!imagePath) {
+                resultDiv.innerHTML = '<p class="text-red-600">Please enter an image path</p>';
+                return;
+            }
+            
+            const cloudinaryUrl = `https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_300,h_200,q_auto,f_auto/${imagePath}`;
+            
+            resultDiv.innerHTML = `
+                <div class="border rounded p-4">
+                    <p class="mb-2"><strong>Testing:</strong> ${imagePath}</p>
+                    <div class="relative">
+                        <img 
+                            src="${cloudinaryUrl}" 
+                            alt="Manual test"
+                            class="w-48 h-32 object-cover rounded border"
+                            onload="this.nextElementSibling.innerHTML='<span class=\\"text-green-600\\">✓ Image exists!</span>'; if (!workingImages.includes('${imagePath}')) { workingImages.push('${imagePath}'); updateWorkingImagesList(); }"
+                            onerror="this.nextElementSibling.innerHTML='<span class=\\"text-red-600\\">✗ Image not found</span>'; this.style.opacity='0.3';"
+                        >
+                        <div class="mt-2"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Populate the grid
+        const grid = document.getElementById('image-grid');
+        testPatterns.forEach((pattern, index) => {
+            grid.appendChild(createImageTest(pattern, index));
+        });
+
+        // Add enter key support for manual test
+        document.getElementById('manual-test-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testManualImage();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Cloudinary Folder Inspector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Quick Cloudinary Image Finder</h1>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <h2 class="font-semibold text-blue-800 mb-2">Steps to find your images:</h2>
+            <ol class="list-decimal list-inside text-blue-700 space-y-1">
+                <li>Go to <a href="https://cloudinary.com" target="_blank" class="underline">cloudinary.com</a> and log in</li>
+                <li>Navigate to Media Library</li>
+                <li>Find your "Grind theory webp" folder</li>
+                <li>Click on each image and copy the <strong>Public ID</strong></li>
+                <li>Paste them below to test if they work</li>
+            </ol>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4">Test Individual Images</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Image Public ID:</label>
+                    <div class="flex gap-2">
+                        <input 
+                            type="text" 
+                            id="image-id-input"
+                            placeholder="e.g., Grind theory webp/homepage or just homepage"
+                            class="flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                        <button 
+                            onclick="testSingleImage()"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        >
+                            Test
+                        </button>
+                    </div>
+                </div>
+                <div id="single-test-result"></div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-lg font-semibold mb-4">Build Your Configuration</h2>
+            <p class="text-gray-600 mb-4">As you find working images, they'll be added here in the correct format:</p>
+            <div class="bg-gray-100 rounded p-4">
+                <pre id="config-output" class="text-sm">// Working images will appear here...</pre>
+            </div>
+            <button 
+                onclick="copyConfig()" 
+                id="copy-btn"
+                class="mt-3 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 hidden"
+            >
+                Copy Configuration
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let workingImages = [];
+
+        function testSingleImage() {
+            const input = document.getElementById('image-id-input');
+            const resultDiv = document.getElementById('single-test-result');
+            const imageId = input.value.trim();
+
+            if (!imageId) {
+                resultDiv.innerHTML = '<p class="text-red-600">Please enter an image ID</p>';
+                return;
+            }
+
+            const cloudinaryUrl = `https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_300,h_200,q_auto,f_auto/${imageId}`;
+            
+            resultDiv.innerHTML = `
+                <div class="border rounded-lg p-4 mt-4">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <img 
+                                src="${cloudinaryUrl}"
+                                alt="Test image"
+                                class="w-32 h-24 object-cover rounded border"
+                                onload="handleImageSuccess('${imageId}', this)"
+                                onerror="handleImageError(this)"
+                            >
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="font-medium">Testing:</span>
+                                <code class="text-sm bg-gray-100 px-2 py-1 rounded">${imageId}</code>
+                                <div id="status-${imageId.replace(/[^a-zA-Z0-9]/g, '')}" class="text-orange-600">⏳ Loading...</div>
+                            </div>
+                            <div class="text-sm text-gray-600 break-all">${cloudinaryUrl}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleImageSuccess(imageId, img) {
+            const statusId = imageId.replace(/[^a-zA-Z0-9]/g, '');
+            const statusDiv = document.getElementById('status-' + statusId);
+            if (statusDiv) {
+                statusDiv.innerHTML = '<span class="text-green-600 font-semibold">✓ Works!</span>';
+            }
+
+            // Add to working images if not already there
+            if (!workingImages.find(item => item.id === imageId)) {
+                const imageNumber = workingImages.length + 1;
+                workingImages.push({
+                    id: imageId,
+                    alt: `Grind Theory - Image ${imageNumber}`,
+                    description: `Description for ${imageId}`
+                });
+                updateConfigOutput();
+            }
+        }
+
+        function handleImageError(img) {
+            img.style.opacity = '0.3';
+            const container = img.closest('[id^="status-"]') || img.parentElement;
+            const statusDiv = container.querySelector('[id^="status-"]');
+            if (statusDiv) {
+                statusDiv.innerHTML = '<span class="text-red-600">✗ Not found</span>';
+            }
+        }
+
+        function updateConfigOutput() {
+            const configDiv = document.getElementById('config-output');
+            const copyBtn = document.getElementById('copy-btn');
+
+            if (workingImages.length === 0) {
+                configDiv.textContent = '// Working images will appear here...';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            const configText = `gallery: [
+${workingImages.map(img => `    {
+        id: '${img.id}',
+        alt: '${img.alt}',
+        description: '${img.description}'
+    }`).join(',\n')}
+]`;
+
+            configDiv.textContent = configText;
+            copyBtn.classList.remove('hidden');
+        }
+
+        function copyConfig() {
+            const configText = document.getElementById('config-output').textContent;
+            navigator.clipboard.writeText(configText).then(() => {
+                const btn = document.getElementById('copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                btn.classList.add('bg-gray-600');
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('bg-gray-600');
+                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                }, 2000);
+            });
+        }
+
+        // Enter key support
+        document.getElementById('image-id-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testSingleImage();
+            }
+        });
+    </script>
+</body>
+</html>

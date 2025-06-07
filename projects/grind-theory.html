@@ -4,17 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grind Theory - Web Design Project | Ramones Capulong</title>
-    <meta name="description" content="Grind Theory web design project by Ramones Capulong - Modern UI/UX design with clean aesthetics and user-focused interface">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Grind Theory web design project by Ramones Capulong - Modern UI/UX design with clean aesthetics and user-focused interface">    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/cloudinary-config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
         body { font-family: 'Inter', sans-serif; }
         .fade-in { animation: fadeIn 0.6s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .image-zoom { transition: transform 0.3s ease; }
+        .image-zoom { transition: transform 0.3s ease; cursor: pointer; }
         .image-zoom:hover { transform: scale(1.02); }
+        
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: #f3f4f6;
+            transform: scale(1.1);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0.8;
+        }
+        
+        .lightbox-nav:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .lightbox-prev {
+            left: 20px;
+        }
+          .lightbox-next {
+            right: 20px;
+        }
+        
+        .lightbox-description {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 80%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+        
+        .lightbox-description p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .zoom-icon {
+            color: white;
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -72,18 +232,17 @@
 
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <!-- Project Info -->
-                    <div class="fade-in">
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Web Design</span>
+                    <div class="fade-in">                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Apparel Design</span>
                             <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">Branding</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">UI/UX</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Marketing Design</span>
                         </div>
                         
                         <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">Grind Theory</h1>
                         
                         <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                            A modern web design project that showcases clean aesthetics and user-focused interface design. 
-                            This project demonstrates a complete brand identity development from concept to execution.
+                            A creative apparel design project featuring unique shirt designs and comprehensive brand identity. 
+                            This project showcases original design concepts, marketing materials, and cohesive visual branding.
                         </p>
 
                         <!-- Project Details -->
@@ -95,10 +254,9 @@
                             <div>
                                 <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Year</h3>
                                 <p class="text-gray-600">2025</p>
-                            </div>
-                            <div>
+                            </div>                            <div>
                                 <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Services</h3>
-                                <p class="text-gray-600">Web Design, Branding, UI/UX</p>
+                                <p class="text-gray-600">Apparel Design, Branding, Marketing</p>
                             </div>
                             <div>
                                 <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Duration</h3>
@@ -118,18 +276,20 @@
                                 View More Work
                             </a>
                         </div>
-                    </div>
-
-                    <!-- Hero Image -->
-                    <div class="fade-in">
-                        <div class="relative">
+                    </div>                    <!-- Hero Image -->
+                    <div class="fade-in">                        <div class="relative gallery-item" data-image="https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/Mockup-one-web_uysett.webp">
                             <img 
                                 src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_800,h_600,q_auto,f_auto/Mockup-one-web_uysett.webp" 
-                                alt="Grind Theory Web Design Mockup - Main View"
+                                alt="Grind Theory Project Mockup - Professional Presentation"
                                 class="w-full rounded-2xl shadow-2xl image-zoom"
                                 loading="eager"
                             >
                             <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
+                            <div class="gallery-overlay" style="border-radius: 1rem;">
+                                <svg class="zoom-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,19 +298,18 @@
 
         <!-- Project Details -->
         <section class="py-20 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Project Overview -->
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">                <!-- Project Overview -->
                 <div class="mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-8">Project Overview</h2>
                     <div class="prose prose-lg max-w-none text-gray-600">
                         <p class="mb-6">
-                            Grind Theory represents a modern approach to web design, focusing on clean aesthetics and intuitive user experience. 
-                            This project challenged me to create a brand identity that would resonate with a contemporary audience while 
-                            maintaining functionality and accessibility.
+                            Grind Theory represents a comprehensive apparel design project, showcasing creative shirt designs and cohesive brand identity. 
+                            This project challenged me to develop unique visual concepts that would resonate with the target audience while 
+                            maintaining brand consistency across all marketing materials.
                         </p>
                         <p class="mb-6">
-                            The design philosophy centered around minimalism without sacrificing visual impact. Every element was carefully 
-                            considered to contribute to the overall user journey, from the initial landing experience to the final conversion point.
+                            The design philosophy centered around bold creativity balanced with commercial viability. Every design element was carefully 
+                            crafted to tell a story, from individual shirt graphics to promotional advertisements and brand collateral.
                         </p>
                     </div>
                 </div>
@@ -160,15 +319,15 @@
                     <div>
                         <h3 class="text-2xl font-semibold text-gray-900 mb-4">The Challenge</h3>
                         <p class="text-gray-600 leading-relaxed">
-                            Creating a web presence that would stand out in a competitive market while maintaining 
-                            excellent usability across all devices and user demographics.
+                            Creating a distinctive apparel brand that would stand out in the competitive fashion market while developing 
+                            designs that appeal to diverse audiences and translate well across different product formats.
                         </p>
                     </div>
                     <div>
                         <h3 class="text-2xl font-semibold text-gray-900 mb-4">The Solution</h3>
                         <p class="text-gray-600 leading-relaxed">
-                            A clean, modern design system with strategic use of whitespace, typography, and color to 
-                            guide users naturally through the content while reinforcing brand identity.
+                            A cohesive design system with strategic use of graphics, typography, and color palettes to 
+                            create memorable shirt designs while building a strong brand identity through consistent marketing materials.
                         </p>
                     </div>
                 </div>
@@ -181,53 +340,58 @@
                             <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <span class="text-purple-600 font-bold">1</span>
                             </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Research & Discovery</h4>
-                            <p class="text-gray-600 text-sm">Understanding the target audience and competitive landscape</p>
-                        </div>
-                        <div class="text-center p-6 bg-gray-50 rounded-xl">
+                            <h4 class="font-semibold text-gray-900 mb-2">Concept & Ideation</h4>
+                            <p class="text-gray-600 text-sm">Developing creative concepts and exploring visual themes for the apparel line</p>
+                        </div>                        <div class="text-center p-6 bg-gray-50 rounded-xl">
                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <span class="text-blue-600 font-bold">2</span>
                             </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Design & Prototype</h4>
-                            <p class="text-gray-600 text-sm">Creating wireframes and high-fidelity mockups</p>
+                            <h4 class="font-semibold text-gray-900 mb-2">Design & Create</h4>
+                            <p class="text-gray-600 text-sm">Developing shirt designs and marketing materials</p>
                         </div>
                         <div class="text-center p-6 bg-gray-50 rounded-xl">
                             <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <span class="text-green-600 font-bold">3</span>
                             </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Test & Refine</h4>
-                            <p class="text-gray-600 text-sm">User testing and iterative improvements</p>
+                            <h4 class="font-semibold text-gray-900 mb-2">Brand & Market</h4>
+                            <p class="text-gray-600 text-sm">Creating cohesive brand identity and promotional content</p>
                         </div>
+                    </div>                </div>                <!-- Project Gallery -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-8">Project Gallery</h3>
+                    <p class="text-gray-600 mb-8">Click on any image to view it in full size with detailed descriptions</p>
+                    
+                    <div class="gallery-grid" id="project-gallery">
+                        <!-- Gallery will be populated by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Tools Used -->
-                <div class="mb-16">
+                <!-- Tools Used -->                <div class="mb-16">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-6">Tools & Technologies</h3>
                     <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Adobe Illustrator</span>
+                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Adobe Photoshop</span>
+                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Adobe InDesign</span>
                         <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Figma</span>
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Adobe Creative Suite</span>
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">HTML/CSS</span>
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">JavaScript</span>
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Responsive Design</span>
+                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Canva Pro</span>
+                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Brand Identity Design</span>
                     </div>
                 </div>
 
-                <!-- Results -->
-                <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8">
+                <!-- Results -->                <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-6">Project Results</h3>
                     <div class="grid md:grid-cols-3 gap-6 text-center">
                         <div>
-                            <div class="text-3xl font-bold text-purple-600 mb-2">100%</div>
-                            <p class="text-gray-600">Client Satisfaction</p>
+                            <div class="text-3xl font-bold text-purple-600 mb-2">4+</div>
+                            <p class="text-gray-600">Unique Designs</p>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold text-blue-600 mb-2">4 Weeks</div>
-                            <p class="text-gray-600">Delivery Time</p>
+                            <div class="text-3xl font-bold text-blue-600 mb-2">Complete</div>
+                            <p class="text-gray-600">Brand Identity</p>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold text-green-600 mb-2">Modern</div>
-                            <p class="text-gray-600">Design Approach</p>
+                            <div class="text-3xl font-bold text-green-600 mb-2">Ready</div>
+                            <p class="text-gray-600">For Production</p>
                         </div>
                     </div>
                 </div>
@@ -264,9 +428,179 @@
                     <p class="text-gray-400 text-sm">© 2025 Ramones Capulong. All rights reserved.</p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </div>    </footer>
 
-    <script src="/js/main.js"></script>
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            
+            <img id="lightbox-image" src="" alt="" />
+            
+            <div class="lightbox-description" id="lightbox-description">
+                <p class="text-white text-center mt-4 px-4"></p>
+            </div>
+            
+            <button class="lightbox-nav lightbox-next" id="lightbox-next">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>    <script>
+        // Lightbox Functionality with Dynamic Gallery Population
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxDescription = document.getElementById('lightbox-description');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const galleryContainer = document.getElementById('project-gallery');
+            
+            let currentImageIndex = 0;
+            let images = [];
+            
+            // Populate gallery dynamically
+            function populateGallery() {
+                if (typeof generateProjectGallery === 'function') {
+                    galleryContainer.innerHTML = generateProjectGallery('grindTheory');
+                } else {
+                    // Fallback if Cloudinary config isn't loaded
+                    console.warn('Cloudinary config not loaded, using fallback gallery');
+                    galleryContainer.innerHTML = `
+                        <div class="gallery-item" data-image="https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/Mockup-one-web_uysett.webp" data-description="Primary landing page design showcasing clean layout and modern aesthetics">
+                            <img 
+                                src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_400,h_300,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                                alt="Grind Theory - Main Web Design Mockup"
+                                loading="lazy"
+                            >
+                            <div class="gallery-overlay">
+                                <svg class="zoom-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // After populating, setup lightbox functionality
+                setupLightbox();
+            }
+            
+            // Setup lightbox functionality
+            function setupLightbox() {
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                images = []; // Reset images array
+                
+                // Collect all gallery images
+                galleryItems.forEach((item, index) => {
+                    const fullSizeUrl = item.dataset.image;
+                    const description = item.dataset.description || '';
+                    const alt = item.querySelector('img').alt;
+                    images.push({ 
+                        url: fullSizeUrl, 
+                        alt: alt,
+                        description: description 
+                    });
+                    
+                    // Add click event to open lightbox
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        currentImageIndex = index;
+                        openLightbox();
+                    });
+                });
+                
+                // Hide navigation arrows if only one image
+                if (images.length <= 1) {
+                    lightboxPrev.style.display = 'none';
+                    lightboxNext.style.display = 'none';
+                } else {
+                    lightboxPrev.style.display = 'block';
+                    lightboxNext.style.display = 'block';
+                }
+            }
+            
+            function openLightbox() {
+                if (images[currentImageIndex]) {
+                    const currentImage = images[currentImageIndex];
+                    lightboxImage.src = currentImage.url;
+                    lightboxImage.alt = currentImage.alt;
+                    
+                    // Update description
+                    const descriptionP = lightboxDescription.querySelector('p');
+                    if (currentImage.description) {
+                        descriptionP.textContent = currentImage.description;
+                        lightboxDescription.style.display = 'block';
+                    } else {
+                        lightboxDescription.style.display = 'none';
+                    }
+                    
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                }
+            }
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+            
+            function showPrevImage() {
+                currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
+                openLightbox();
+            }
+            
+            function showNextImage() {
+                currentImageIndex = currentImageIndex < images.length - 1 ? currentImageIndex + 1 : 0;
+                openLightbox();
+            }
+            
+            // Event listeners
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', showPrevImage);
+            lightboxNext.addEventListener('click', showNextImage);
+            
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        showPrevImage();
+                        break;
+                    case 'ArrowRight':
+                        showNextImage();
+                        break;
+                }
+            });
+            
+            // Initialize gallery
+            populateGallery();
+        });
+    </script>
 </body>
 </html>
