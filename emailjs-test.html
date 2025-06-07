@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmailJS Anti-Threading Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-4">EmailJS Anti-Threading Test</h1>
+            <p class="text-gray-600 mb-6">Use this page to test if your EmailJS template is properly configured to prevent Gmail email grouping.</p>
+            
+            <!-- Test Results -->
+            <div id="test-results" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <h3 class="font-semibold text-blue-900 mb-2">Test Data Generated:</h3>
+                <div id="test-data" class="text-sm text-blue-800 font-mono"></div>
+            </div>
+            
+            <!-- Quick Test Form -->
+            <form id="test-form" class="space-y-4">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Test Name</label>
+                        <input type="text" id="test-name" value="Test User" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Test Email</label>
+                        <input type="email" id="test-email" value="test@example.com"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Test Message</label>
+                    <textarea id="test-message" rows="3" 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">This is a test message to verify the anti-threading system is working correctly.</textarea>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <button type="button" id="generate-test" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                        Generate Test Data
+                    </button>
+                    <button type="submit" id="send-test" 
+                            class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">
+                        Send Test Email
+                    </button>
+                    <button type="button" id="send-multiple" 
+                            class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors">
+                        Send 3 Test Emails
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Status Messages -->
+            <div id="status-messages" class="mt-6"></div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Testing Instructions</h2>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                <li>First, update your EmailJS template using the configuration guide</li>
+                <li>Click "Generate Test Data" to see what unique data will be sent</li>
+                <li>Click "Send Test Email" to send a single test</li>
+                <li>Click "Send 3 Test Emails" to send multiple emails quickly</li>
+                <li>Check your Gmail inbox - each email should appear separately, not grouped</li>
+                <li>If emails still group, review the template configuration</li>
+            </ol>
+            
+            <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+                <p class="text-yellow-800"><strong>Note:</strong> Make sure you've updated your EmailJS template with all the variables from the configuration guide before testing.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // EmailJS Configuration
+        const EMAILJS_SERVICE_ID = 'service_7kwapdi';
+        const EMAILJS_TEMPLATE_ID = 'template_ti5dryi';
+        const EMAILJS_PUBLIC_KEY = '2gvmyEoY7s9Qjdi3U';
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-test');
+            const sendBtn = document.getElementById('send-test');
+            const sendMultipleBtn = document.getElementById('send-multiple');
+            const testForm = document.getElementById('test-form');
+            const testResults = document.getElementById('test-results');
+            const testData = document.getElementById('test-data');
+            const statusMessages = document.getElementById('status-messages');
+
+            let currentTestData = null;
+
+            // Generate test data
+            generateBtn.addEventListener('click', function() {
+                currentTestData = generateTestData();
+                displayTestData(currentTestData);
+                testResults.classList.remove('hidden');
+            });
+
+            // Send single test email
+            testForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (!currentTestData) {
+                    currentTestData = generateTestData();
+                }
+                sendTestEmail(currentTestData);
+            });
+
+            // Send multiple test emails
+            sendMultipleBtn.addEventListener('click', function() {
+                sendMultipleTestEmails(3);
+            });
+
+            function generateTestData() {
+                const now = new Date();
+                const microTime = performance.now();
+                const sessionId = Math.random().toString(36).substr(2, 12);
+                const uniqueId = `TEST-${now.getTime()}-${Math.floor(microTime)}-${sessionId}`;
+                
+                const subjectVariations = [
+                    `New Portfolio Inquiry - ${uniqueId}`,
+                    `Creative Project Request | Ref: ${uniqueId}`,
+                    `Design Consultation Request - ID: ${uniqueId}`,
+                    `Project Quote Request [${uniqueId}]`,
+                    `Creative Services Inquiry - ${uniqueId}`,
+                    `New Client Message | ${uniqueId}`,
+                    `Portfolio Contact Form - ${uniqueId}`,
+                    `Design Project Inquiry - Ref: ${uniqueId}`
+                ];
+                const randomSubject = subjectVariations[Math.floor(Math.random() * subjectVariations.length)];
+
+                return {
+                    from_name: document.getElementById('test-name').value,
+                    reply_to: document.getElementById('test-email').value,
+                    budget: 'Test Budget',
+                    timeline: 'Test Timeline',
+                    message: document.getElementById('test-message').value,
+                    email_subject: randomSubject,
+                    inquiry_id: uniqueId,
+                    submission_time: now.toISOString(),
+                    session_id: sessionId,
+                    micro_timestamp: microTime.toString(),
+                    client_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    unique_ref: Math.random().toString(36).substr(2, 20),
+                    form_version: '3.0-EmailJS-Enhanced-Test',
+                    user_agent: navigator.userAgent.slice(0, 50),
+                    client_language: navigator.language,
+                    client_platform: navigator.platform,
+                    screen_info: `${screen.width}x${screen.height}`,
+                    random_hash: Math.random().toString(36).substr(2, 16),
+                    submission_hash: btoa(uniqueId + microTime).substr(0, 12),
+                    thread_breaker: `TB-${Date.now()}-${Math.random().toString(36).substr(2, 8)}`,
+                    to_name: 'Ramones Capulong'
+                };
+            }
+
+            function displayTestData(data) {
+                testData.innerHTML = `
+                    <div class="grid md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <strong>Subject:</strong> ${data.email_subject}<br>
+                            <strong>Inquiry ID:</strong> ${data.inquiry_id}<br>
+                            <strong>Session ID:</strong> ${data.session_id}<br>
+                            <strong>Thread Breaker:</strong> ${data.thread_breaker}<br>
+                            <strong>Random Hash:</strong> ${data.random_hash}
+                        </div>
+                        <div>
+                            <strong>Micro Timestamp:</strong> ${data.micro_timestamp}<br>
+                            <strong>Unique Ref:</strong> ${data.unique_ref}<br>
+                            <strong>Submission Hash:</strong> ${data.submission_hash}<br>
+                            <strong>Platform:</strong> ${data.client_platform}<br>
+                            <strong>Screen:</strong> ${data.screen_info}
+                        </div>
+                    </div>
+                `;
+            }
+
+            function sendTestEmail(templateParams) {
+                addStatusMessage('Sending test email...', 'info');
+                
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                    .then(function(response) {
+                        console.log('Test email sent successfully:', response);
+                        addStatusMessage(`✅ Test email sent successfully! Subject: "${templateParams.email_subject}"`, 'success');
+                    })
+                    .catch(function(error) {
+                        console.error('Test email failed:', error);
+                        addStatusMessage(`❌ Test email failed: ${error.text || error.message}`, 'error');
+                    });
+            }
+
+            function sendMultipleTestEmails(count) {
+                addStatusMessage(`Sending ${count} test emails...`, 'info');
+                
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        const testData = generateTestData();
+                        testData.message = `${testData.message} (Email ${i + 1} of ${count})`;
+                        sendTestEmail(testData);
+                    }, i * 2000); // 2 second delay between emails
+                }
+            }
+
+            function addStatusMessage(message, type) {
+                const div = document.createElement('div');
+                const colors = {
+                    info: 'bg-blue-50 border-blue-200 text-blue-800',
+                    success: 'bg-green-50 border-green-200 text-green-800',
+                    error: 'bg-red-50 border-red-200 text-red-800'
+                };
+                
+                div.className = `border rounded-lg p-3 mb-2 ${colors[type]}`;
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span>${message}</span>
+                        <span class="text-xs opacity-70">${new Date().toLocaleTimeString()}</span>
+                    </div>
+                `;
+                
+                statusMessages.insertBefore(div, statusMessages.firstChild);
+                
+                // Remove after 10 seconds
+                setTimeout(() => {
+                    if (div.parentNode) {
+                        div.remove();
+                    }
+                }, 10000);
+            }
+        });
+    </script>
+</body>
+</html>
