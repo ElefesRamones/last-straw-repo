@@ -58,10 +58,6 @@
 # Form notification settings for better email separation
 [[plugins]]
   package = "netlify-plugin-form-submissions"
-  
-  [plugins.inputs]
-    # Custom email template for better formatting
-    emailTemplate = "custom"
 
 # Custom form success redirects
 [[redirects]]
