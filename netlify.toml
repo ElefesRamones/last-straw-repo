@@ -51,13 +51,9 @@
   to = "/projects/:splat.html"
   status = 200
 
-# Form handling - Enhanced email notifications
-[template.environment]
-  FORM_NOTIFICATION_EMAIL = "elefesramones51@gmail.com"
-  
-# Form notification settings for better email separation
-[[plugins]]
-  package = "netlify-plugin-form-submissions"
+# Form handling - Netlify Forms (built-in)
+# Forms are automatically detected and handled by Netlify
+# Email notifications can be configured in the Netlify dashboard
 
 # Custom form success redirects
 [[redirects]]

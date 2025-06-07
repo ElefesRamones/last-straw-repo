@@ -18,9 +18,7 @@
     "freelance"
   ],
   "author": "Ramones Capulong <elefesramones51@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "netlify-plugin-form-submissions": "^0.1.4",
+  "license": "MIT",  "devDependencies": {
     "serve": "^14.2.1"
   },
   "repository": {
