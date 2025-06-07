@@ -1,7 +1,9 @@
-{  "name": "ramones-portfolio",
+{
+  "name": "ramones-portfolio",
   "version": "1.0.0",
   "description": "Portfolio website for Ramones Capulong - Creative professional specializing in graphic design, video editing, and social media management",
-  "main": "index.html",  "scripts": {
+  "main": "index.html",
+  "scripts": {
     "start": "npx serve . -p 3000",
     "dev": "npx serve . -p 3000",
     "build": "echo 'No build process needed for static site'",
@@ -18,6 +20,7 @@
   "author": "Ramones Capulong <elefesramones51@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "netlify-plugin-form-submissions": "^0.1.4",
     "serve": "^14.2.1"
   },
   "repository": {
