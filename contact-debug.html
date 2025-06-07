@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Debug - EmailJS Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-4">🔧 Contact Form Diagnostic</h1>
+            
+            <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <h2 class="font-semibold text-blue-900 mb-2">Current Status:</h2>
+                <p class="text-blue-800">This page tests if EmailJS is working correctly on your website.</p>
+                <p class="text-sm text-blue-600 mt-2">Deployed: June 7, 2025 - v1.1</p>
+            </div>
+
+            <!-- Quick EmailJS Test -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                <h3 class="font-semibold text-green-900 mb-2">Quick EmailJS Test</h3>
+                <button id="test-emailjs" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+                    Send Test Email Now
+                </button>
+                <div id="test-result" class="mt-2 text-sm"></div>
+            </div>
+
+            <!-- Form Detection Test -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <h3 class="font-semibold text-yellow-900 mb-2">Form Detection Test</h3>
+                <p class="text-yellow-800 text-sm">Current form system: <span id="form-system" class="font-mono">Detecting...</span></p>
+                <p class="text-yellow-800 text-sm">EmailJS loaded: <span id="emailjs-status" class="font-mono">Checking...</span></p>
+            </div>
+
+            <!-- Navigation Test -->
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <h3 class="font-semibold text-purple-900 mb-2">Navigation Test</h3>
+                <div class="space-y-2">
+                    <p><a href="/contact.html" class="text-purple-600 hover:underline">Main Contact Page</a></p>
+                    <p><a href="/contact-emailjs.html" class="text-purple-600 hover:underline">EmailJS Contact Page (if exists)</a></p>
+                    <p><a href="/contact-netlify-backup.html" class="text-purple-600 hover:underline">Netlify Backup Page</a></p>
+                    <p><a href="/emailjs-test.html" class="text-purple-600 hover:underline">EmailJS Testing Tool</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // EmailJS Configuration
+        const EMAILJS_SERVICE_ID = 'service_7kwapdi';
+        const EMAILJS_TEMPLATE_ID = 'template_ti5dryi';
+        const EMAILJS_PUBLIC_KEY = '2gvmyEoY7s9Qjdi3U';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check EmailJS status
+            const emailjsStatus = document.getElementById('emailjs-status');
+            const formSystem = document.getElementById('form-system');
+            const testResult = document.getElementById('test-result');
+            const testButton = document.getElementById('test-emailjs');
+
+            // Check if EmailJS is loaded
+            if (typeof emailjs !== 'undefined') {
+                emailjsStatus.textContent = '✅ Loaded';
+                emailjsStatus.className = 'font-mono text-green-600';
+                emailjs.init(EMAILJS_PUBLIC_KEY);
+            } else {
+                emailjsStatus.textContent = '❌ Not loaded';
+                emailjsStatus.className = 'font-mono text-red-600';
+            }
+
+            // Check form system
+            const contactForm = document.querySelector('#emailjs-form');
+            const netlifyForm = document.querySelector('form[data-netlify="true"]');
+            
+            if (contactForm) {
+                formSystem.textContent = '✅ EmailJS Form System';
+                formSystem.className = 'font-mono text-green-600';
+            } else if (netlifyForm) {
+                formSystem.textContent = '⚠️ Netlify Form System';
+                formSystem.className = 'font-mono text-yellow-600';
+            } else {
+                formSystem.textContent = '❌ No form system detected';
+                formSystem.className = 'font-mono text-red-600';
+            }
+
+            // Test EmailJS functionality
+            testButton.addEventListener('click', function() {
+                if (typeof emailjs === 'undefined') {
+                    testResult.innerHTML = '<span class="text-red-600">❌ EmailJS not loaded</span>';
+                    return;
+                }
+
+                testResult.innerHTML = '<span class="text-blue-600">🔄 Sending test email...</span>';
+
+                const now = new Date();
+                const uniqueId = `DEBUG-${now.getTime()}`;
+                
+                const templateParams = {
+                    from_name: 'Debug Test',
+                    reply_to: 'debug@test.com',
+                    budget: 'Test',
+                    timeline: 'Test',
+                    message: 'This is a debug test from the contact-debug.html page.',
+                    email_subject: `Debug Test - ${uniqueId}`,
+                    inquiry_id: uniqueId,
+                    submission_time: now.toISOString(),
+                    session_id: 'debug-session',
+                    micro_timestamp: performance.now().toString(),
+                    client_timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    unique_ref: Math.random().toString(36).substr(2, 20),
+                    form_version: 'debug-1.0',
+                    user_agent: navigator.userAgent.slice(0, 50),
+                    client_language: navigator.language,
+                    client_platform: navigator.platform,
+                    screen_info: `${screen.width}x${screen.height}`,
+                    random_hash: Math.random().toString(36).substr(2, 16),
+                    submission_hash: btoa(uniqueId).substr(0, 12),
+                    thread_breaker: `TB-DEBUG-${Date.now()}`,
+                    to_name: 'Ramones Capulong'
+                };
+
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                    .then(function(response) {
+                        console.log('Debug test successful:', response);
+                        testResult.innerHTML = '<span class="text-green-600">✅ Test email sent successfully!</span>';
+                    })
+                    .catch(function(error) {
+                        console.error('Debug test failed:', error);
+                        testResult.innerHTML = `<span class="text-red-600">❌ Test failed: ${error.text || error.message}</span>`;
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
