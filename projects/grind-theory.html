@@ -9,7 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
-        body { font-family: 'Inter', sans-serif; }
+        * { box-sizing: border-box; }
+        html, body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            background-color: white;
+        }
         .fade-in { animation: fadeIn 0.6s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .image-zoom { transition: transform 0.3s ease; cursor: pointer; }
@@ -341,143 +349,162 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Project Details -->
+        </section>        <!-- Project Details -->
         <section class="py-20 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">                <!-- Project Overview -->
-                <div class="mb-16">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Project Overview</h2>                    <div class="prose prose-lg max-w-none text-gray-600">
-                        <p class="mb-6">
-                            Grind Theory is a concept skater clothing line that merges the intellectual world of physics with skateboarding culture. 
-                            The brand name inspired a creative exploration where I developed a unique logo featuring Einstein riding a skateboard, 
-                            symbolizing the fusion of scientific genius and street skating lifestyle.
-                        </p>
-                        <p class="mb-6">
-                            The design process involved multiple iterations to perfect the Einstein skateboard concept, paired with modern, 
-                            mechanical typography that emphasizes the scientific aspect while maintaining street credibility. The final brand 
-                            identity represents both the analytical "theory" and the physical "grind" of skateboarding culture.
-                        </p>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Hero Image -->
+                <div class="mb-20">
+                    <div class="aspect-video rounded-2xl overflow-hidden shadow-xl">
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_675,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                            alt="Grind Theory Main Design"
+                            class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(0)"
+                        >
                     </div>
                 </div>
 
-                <!-- Challenge & Solution -->
-                <div class="grid md:grid-cols-2 gap-12 mb-16">                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">The Challenge</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Creating a unique brand identity that successfully combines two seemingly different worlds - the intellectual 
-                            realm of scientific theory and the rebellious, creative culture of skateboarding. The challenge was developing 
-                            designs that would resonate with skaters while honoring the scientific inspiration behind the brand name.
-                        </p>
-                    </div>                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">The Solution</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Developed an iconic logo featuring Einstein riding a skateboard after multiple design iterations, paired with 
-                            modern mechanical typography. Created two distinct shirt designs: a cyberpunk/neon design featuring the main logo, 
-                            and a unique fusion of vaporwave aesthetics with Filipino revolutionary themes featuring Andres Bonifacio and 
-                            the historic Katipunan sun symbol.
-                        </p>
+                <!-- Brief Overview -->
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Einstein Meets Skateboarding</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        A concept skater clothing line merging scientific genius with street culture. 
+                        Two unique designs featuring cyberpunk aesthetics and Filipino revolutionary themes.
+                    </p>
+                </div>                <!-- Design Showcase -->
+                <div class="grid lg:grid-cols-2 gap-16 mb-20">                    <div>
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-cyberpunk-web_otd14a.webp" 
+                            alt="Cyberpunk Neon Design"
+                            class="w-full h-auto rounded-2xl shadow-lg mb-6 cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(1)"
+                        >
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Cyberpunk Einstein</h3>
+                        <p class="text-gray-600">Neon-powered logo design combining scientific innovation with futuristic skateboarding aesthetics.</p>
+                    </div>
+                      <div>
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-revolution-web_exwllv.webp" 
+                            alt="Vaporwave Filipino Design"
+                            class="w-full h-auto rounded-2xl shadow-lg mb-6 cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(2)"
+                        >
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Vaporwave Revolution</h3>
+                        <p class="text-gray-600">Synthwave grids meet Filipino hero Andres Bonifacio with historic Katipunan sun symbolism.</p>
                     </div>
                 </div>
 
-                <!-- Design Process -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-8">Design Process</h3>
+                <!-- Process -->
+                <div class="mb-20">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Creative Process</h2>
+                        <p class="text-lg text-gray-600">From concept to final design</p>
+                    </div>
+                    
                     <div class="grid md:grid-cols-3 gap-8">
-                        <div class="text-center p-6 bg-gray-50 rounded-xl">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-purple-600 font-bold">1</span>
-                            </div>                            <h4 class="font-semibold text-gray-900 mb-2">Concept & Ideation</h4>
-                            <p class="text-gray-600 text-sm">Exploring the fusion of Einstein's scientific genius with skateboarding culture</p>
-                        </div>                        <div class="text-center p-6 bg-gray-50 rounded-xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-blue-600 font-bold">2</span>
-                            </div>                            <h4 class="font-semibold text-gray-900 mb-2">Design & Create</h4>
-                            <p class="text-gray-600 text-sm">Creating the Einstein skateboard logo and two distinct shirt designs</p>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-purple-600 font-bold text-xl">1</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900 mb-2">Concept</h4>
+                            <p class="text-gray-600 text-sm">Einstein + skateboarding fusion</p>
                         </div>
-                        <div class="text-center p-6 bg-gray-50 rounded-xl">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-green-600 font-bold">3</span>
-                            </div>                            <h4 class="font-semibold text-gray-900 mb-2">Brand & Typography</h4>
-                            <p class="text-gray-600 text-sm">Developing mechanical typography and cohesive brand identity system</p>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-blue-600 font-bold text-xl">2</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900 mb-2">Logo</h4>
+                            <p class="text-gray-600 text-sm">Multiple iterations to perfection</p>
                         </div>
-                    </div>                </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-green-600 font-bold text-xl">3</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900 mb-2">Designs</h4>
+                            <p class="text-gray-600 text-sm">Two unique shirt concepts</p>
+                        </div>
+                    </div>
+                </div>
 
-                <!-- Design Concepts -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-8">Design Concepts</h3>
-                    
-                    <div class="grid md:grid-cols-2 gap-8 mb-12">
-                        <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-8">
-                            <h4 class="text-xl font-semibold text-gray-900 mb-4">Logo Development</h4>
-                            <p class="text-gray-600 mb-4">
-                                The core concept emerged from the brand name "Grind Theory" - combining the analytical world of Einstein's theories 
-                                with the physical grind of skateboarding. After multiple iterations, I created an iconic logo featuring Einstein 
-                                riding a skateboard, representing the perfect fusion of intellect and street culture.
-                            </p>
-                            <p class="text-gray-600">
-                                The typography uses modern, mechanical fonts that emphasize the scientific aspect while maintaining the rebellious 
-                                spirit of skate culture.
-                            </p>
+                <!-- Brand Identity -->
+                <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Brand Identity</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">The Challenge</h4>
+                                <p class="text-gray-600">Merge intellectual scientific theory with rebellious skateboarding culture.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">The Solution</h4>
+                                <p class="text-gray-600">Einstein skateboard logo with modern mechanical typography and cultural fusion designs.</p>
+                            </div>
                         </div>
+                    </div>                    <div>
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749317473/grind-logo_bevtff.png" 
+                            alt="Brand Identity Design"
+                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(3)"
+                        >
+                    </div>
+                </div>
+
+                <!-- Tools & Results -->
+                <div class="grid md:grid-cols-2 gap-12 mb-20">
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Tools Used</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-white text-gray-800 rounded-lg font-medium shadow-sm">Adobe Photoshop</span>
+                            <span class="px-4 py-2 bg-white text-gray-800 rounded-lg font-medium shadow-sm">Adobe Illustrator</span>
+                            <span class="px-4 py-2 bg-white text-gray-800 rounded-lg font-medium shadow-sm">Canva</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Results</h3>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <div class="text-2xl font-bold text-purple-600 mb-1">2</div>
+                                <p class="text-gray-600 text-sm">Shirt Designs</p>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-blue-600 mb-1">1</div>
+                                <p class="text-gray-600 text-sm">Iconic Logo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                <!-- Additional Content Gallery -->
+                <div class="mb-20">
+                    <div class="text-center mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Additional Designs</h3>
+                        <p class="text-gray-600">Exploring the complete design system</p>
+                    </div>                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/pre-order-ad-web_ejhliu.webp" 
+                            alt="Pre-Order Advertisement"
+                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(4)"
+                        >
                         
-                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8">
-                            <h4 class="text-xl font-semibold text-gray-900 mb-4">Shirt Design #1: Cyberpunk/Neon</h4>
-                            <p class="text-gray-600">
-                                The first design features the main Grind Theory logo in a cyberpunk/neon aesthetic. This design captures the 
-                                futuristic, tech-forward aspect of scientific innovation while maintaining the edgy appeal that resonates 
-                                with skateboarding culture. Bold neon colors and cyberpunk elements create a striking visual impact.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8">
-                        <h4 class="text-xl font-semibold text-gray-900 mb-4">Shirt Design #2: Vaporwave x Filipino Revolution</h4>
-                        <p class="text-gray-600 mb-4">
-                            The second design represents a unique cultural fusion - combining vaporwave/synthwave aesthetics with Filipino 
-                            revolutionary themes. This design features the iconic grid lines characteristic of vaporwave music culture, 
-                            creating a nostalgic, retro-futuristic backdrop.
-                        </p>
-                        <p class="text-gray-600">
-                            Central to this design is Andres Bonifacio (known as "Supremo"), a Filipino revolutionary hero, integrated with 
-                            the historic Katipunan sun symbol from the revolutionary flags. The emphasis on red color pays homage to the 
-                            revolutionary spirit while creating a bold, culturally significant statement piece.
-                        </p>
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt2-combo-web_blj8st.webp" 
+                            alt="Shirt Design 2 Combination"
+                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(5)"
+                        >
+                        
+                        <img 
+                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt1-combo-web_bkd6ep.webp" 
+                            alt="Shirt Design 1 Combination"
+                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
+                            onclick="openLightbox(6)"
+                        >
                     </div>
                 </div>
 
-                <!-- Project Gallery -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-8">Project Gallery</h3>
-                    <p class="text-gray-600 mb-8">Click on any image to view it in full size with detailed descriptions</p>
-                    
-                    <div class="gallery-grid" id="project-gallery">
-                        <!-- Gallery will be populated by JavaScript -->
-                    </div>
-                </div>                <!-- Tools Used -->                <div class="mb-16">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Tools & Technologies</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Adobe Photoshop</span>
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Adobe Illustrator</span>
-                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-medium">Canva</span>
-                    </div>
-                </div>
-
-                <!-- Results -->                <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Project Results</h3>
-                    <div class="grid md:grid-cols-3 gap-6 text-center">                        <div>
-                            <div class="text-3xl font-bold text-purple-600 mb-2">2</div>
-                            <p class="text-gray-600">Unique Shirt Designs</p>
-                        </div>                        <div>
-                            <div class="text-3xl font-bold text-blue-600 mb-2">Einstein</div>
-                            <p class="text-gray-600">Skateboard Logo</p>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-bold text-green-600 mb-2">Portfolio</div>
-                            <p class="text-gray-600">Showcase Piece</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -536,64 +563,87 @@
         </div>
     </div>
 
-    <script src="/js/main.js"></script>    <script>        // Lightbox Functionality with Dynamic Gallery Population
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxClose = document.getElementById('lightbox-close');
-            const lightboxPrev = document.getElementById('lightbox-prev');
-            const lightboxNext = document.getElementById('lightbox-next');
-            const galleryContainer = document.getElementById('project-gallery');
-            
-            let currentImageIndex = 0;
-            let images = [];
-            
-            // Populate gallery dynamically
-            function populateGallery() {
-                if (typeof generateProjectGallery === 'function') {
-                    galleryContainer.innerHTML = generateProjectGallery('grindTheory');
-                } else {
-                    // Fallback if Cloudinary config isn't loaded
-                    console.warn('Cloudinary config not loaded, using fallback gallery');
-                    galleryContainer.innerHTML = `
-                        <div class="gallery-item" data-image="https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/Mockup-one-web_uysett.webp">
-                            <img 
-                                src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_400,h_300,q_auto,f_auto/Mockup-one-web_uysett.webp" 
-                                alt="Grind Theory - Main Apparel Design Mockup"
-                                loading="lazy"
-                            >
-                            <div class="gallery-overlay">
-                                <svg class="zoom-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    `;
-                }
+    <script src="/js/main.js"></script>    <script>        // Global variables for lightbox functionality
+        let currentImageIndex = 0;
+        let images = [];
+        let lightbox, lightboxImage, lightboxClose, lightboxPrev, lightboxNext;
+        
+        // Global function to open lightbox (called by onclick handlers)
+        function openLightbox(index) {
+            currentImageIndex = index;
+            if (images[currentImageIndex]) {
+                const currentImage = images[currentImageIndex];
+                lightboxImage.src = currentImage.url;
+                lightboxImage.alt = currentImage.alt;
                 
-                // After populating, setup lightbox functionality
-                setupLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-            
+        }
+        
+        // Lightbox Functionality with Dynamic Gallery Population
+        document.addEventListener('DOMContentLoaded', function() {
+            lightbox = document.getElementById('lightbox');
+            lightboxImage = document.getElementById('lightbox-image');
+            lightboxClose = document.getElementById('lightbox-close');
+            lightboxPrev = document.getElementById('lightbox-prev');
+            lightboxNext = document.getElementById('lightbox-next');
+            const galleryContainer = document.getElementById('project-gallery');
+              // Define all images for lightbox navigation
+            images = [
+                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/Mockup-one-web_uysett.webp',
+                    alt: 'Grind Theory Main Design'
+                },
+                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749314662/concept-cyberpunk-web_otd14a.webp',
+                    alt: 'Cyberpunk Neon Design'
+                },
+                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749314662/concept-revolution-web_exwllv.webp',
+                    alt: 'Vaporwave Filipino Design'
+                },                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749317473/grind-logo_bevtff.png',
+                    alt: 'Brand Identity Design'
+                },
+                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749304333/pre-order-ad-web_ejhliu.webp',
+                    alt: 'Pre-Order Advertisement'
+                },
+                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749304333/shirt2-combo-web_blj8st.webp',
+                    alt: 'Shirt Design 2 Combination'
+                },
+                {
+                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749304333/shirt1-combo-web_bkd6ep.webp',
+                    alt: 'Shirt Design 1 Combination'
+                }
+            ];
             // Setup lightbox functionality
             function setupLightbox() {
                 const galleryItems = document.querySelectorAll('.gallery-item');
-                images = []; // Reset images array
                 
-                // Collect all gallery images
+                // Collect any remaining gallery images (if any exist)
                 galleryItems.forEach((item, index) => {
                     const fullSizeUrl = item.dataset.image;
                     const alt = item.querySelector('img').alt;
-                    images.push({ 
-                        url: fullSizeUrl, 
-                        alt: alt
-                    });
+                    
+                    // Only add if not already in images array
+                    const existingImageIndex = images.findIndex(img => img.url === fullSizeUrl);
+                    if (existingImageIndex === -1) {
+                        images.push({ 
+                            url: fullSizeUrl, 
+                            alt: alt
+                        });
+                    }
                     
                     // Add click event to open lightbox
                     item.addEventListener('click', function(e) {
                         e.preventDefault();
-                        currentImageIndex = index;
-                        openLightbox();
+                        const imageIndex = images.findIndex(img => img.url === fullSizeUrl);
+                        if (imageIndex !== -1) {
+                            openLightbox(imageIndex);
+                        }
                     });
                 });
                 
@@ -607,30 +657,18 @@
                 }
             }
             
-            function openLightbox() {
-                if (images[currentImageIndex]) {
-                    const currentImage = images[currentImageIndex];
-                    lightboxImage.src = currentImage.url;
-                    lightboxImage.alt = currentImage.alt;
-                    
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                }
-            }
-            
             function closeLightbox() {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = 'auto'; // Restore scrolling
             }
-            
-            function showPrevImage() {
+              function showPrevImage() {
                 currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
-                openLightbox();
+                openLightbox(currentImageIndex);
             }
             
             function showNextImage() {
                 currentImageIndex = currentImageIndex < images.length - 1 ? currentImageIndex + 1 : 0;
-                openLightbox();
+                openLightbox(currentImageIndex);
             }
             
             // Event listeners
@@ -660,10 +698,9 @@
                         showNextImage();
                         break;
                 }
-            });
-            
-            // Initialize gallery
-            populateGallery();
+            });            
+            // Initialize lightbox functionality
+            setupLightbox();
         });
     </script>
 </body>
