@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">
-    <link rel="shortcut icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">
-    <style>
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">    <style>
         * { box-sizing: border-box; }
         html, body { 
             font-family: 'Inter', sans-serif; 
@@ -22,6 +21,29 @@
         }
         .fade-in { animation: fadeIn 0.6s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .project-card { 
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            overflow: hidden;
+        }
+        .project-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        }
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3));
+            color: white;
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -32,11 +54,10 @@
                         <img src="/assets/images/logo/portfolio-logo.png" alt="Ramones Capulong" class="h-10 w-auto">
                     </a>
                 </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
+                <div class="hidden md:block">                    <div class="ml-10 flex items-baseline space-x-8">
                         <a href="/" class="text-gray-900 hover:text-gray-600 transition-colors font-medium">Home</a>
                         <a href="/about.html" class="text-gray-600 hover:text-gray-900 transition-colors">About Me</a>
-                        <a href="/projects.html" class="text-gray-600 hover:text-gray-900 transition-colors">Projects</a>
+                        <a href="#projects" class="text-gray-600 hover:text-gray-900 transition-colors">Projects</a>
                         <a href="/contact.html" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
                     </div>
                 </div>
@@ -51,11 +72,10 @@
             </div>
         </div>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-2 pt-2 pb-3 space-y-1">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">            <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="/" class="block px-3 py-2 text-gray-900 font-medium">Home</a>
                 <a href="/about.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">About Me</a>
-                <a href="/projects.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">Projects</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-600 hover:text-gray-900">Projects</a>
                 <a href="/contact.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">Contact</a>
             </div>
         </div>
@@ -72,9 +92,8 @@
                 </p>
                 <p class="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
                     Creative professional specializing in graphic design, video editing, and social media management
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/projects.html" class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gray-900 hover:bg-gray-800 transition-colors">
+                </p>                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gray-900 hover:bg-gray-800 transition-colors">
                         View My Work
                     </a>
                     <a href="/contact.html" class="inline-flex items-center px-8 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors">
@@ -127,88 +146,219 @@
                         <p class="text-gray-600">Developing strategic content that builds communities and drives engagement across platforms</p>
                     </div>
                 </div>
-            </div>        </section>
-
-        <!-- Featured Projects -->
-        <section class="py-20 bg-gray-50">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            </div>        </section>        <!-- My Projects -->
+        <section id="projects" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Work</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">My Projects</h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                        A glimpse into my latest creative projects
+                        A showcase of creative work spanning graphic design, video editing, and social media content
                     </p>
                 </div>
-                  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Ramones Tribute Concert Project - Featured -->
-                    <div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="aspect-video overflow-hidden">
-                            <img 
-                                src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_800,h_450,q_auto,f_auto/v1749832468/poster1-web_iy9myc.webp" 
-                                alt="Ramones Tribute Concert Event Design"
-                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                loading="lazy"
-                            >
-                        </div>
-                        <div class="p-8">
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Event Design</span>
-                                <span class="text-sm text-gray-500">Latest Project</span>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Ramones Tribute Concert</h3>
-                            <p class="text-gray-600 mb-6 leading-relaxed">
-                                Complete visual identity for a tribute concert event featuring concert posters, ticket designs, 
-                                social media content, and professional mockup presentations capturing the raw energy of punk rock.
-                            </p>
-                            <a href="/projects/ramones-tribute-concert.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 font-medium">
-                                View Project
-                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Coming Soon Projects -->
-                    <div class="space-y-8">
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-square bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center">
-                                <div class="text-white text-center">
-                                    <svg class="w-12 h-12 mx-auto mb-3" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                                    </svg>
-                                    <p class="text-sm opacity-90">Video Project</p>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h4 class="text-lg font-semibold text-gray-900 mb-2">Coming Soon</h4>
-                                <p class="text-gray-600 text-sm">New video editing projects</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="aspect-square bg-gradient-to-br from-green-400 to-teal-400 flex items-center justify-center">
-                                <div class="text-white text-center">
-                                    <svg class="w-12 h-12 mx-auto mb-3" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2M7 4h10l2 8H5l2-8zM11 12h2"/>
-                                    </svg>
-                                    <p class="text-sm opacity-90">Social Campaign</p>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h4 class="text-lg font-semibold text-gray-900 mb-2">Coming Soon</h4>
-                                <p class="text-gray-600 text-sm">Social media campaigns</p>
-                            </div>
-                        </div>
-                    </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="filter-btn active px-6 py-3 bg-gray-900 text-white rounded-full font-medium transition-colors" data-filter="all">
+                        All Projects
+                    </button>
+                    <button class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full font-medium transition-colors" data-filter="design">
+                        Graphic Design
+                    </button>
+                    <button class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full font-medium transition-colors" data-filter="video">
+                        Video Editing
+                    </button>
+                    <button class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full font-medium transition-colors" data-filter="social">
+                        Social Media
+                    </button>
                 </div>
                 
-                <div class="text-center mt-12">
-                    <a href="/projects.html" class="inline-flex items-center px-8 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                        View All Projects
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                <!-- Projects Grid -->
+                <div class="grid md:grid-cols-2 gap-12" id="projects-grid">
+                    
+                    <!-- Project Card 1 - Ramones Tribute Concert -->
+                    <div class="project-card bg-white shadow-lg border border-gray-100" data-category="design">
+                        <div class="aspect-[16/10] relative">
+                            <img 
+                                src="https://res.cloudinary.com/drlifoeqc/image/upload/w_800,q_auto,f_auto/v1749832468/poster1-web_iy9myc.webp" 
+                                alt="Ramones Tribute Concert Event Design"
+                                class="w-full h-full object-cover"
+                                loading="lazy"
+                            >
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Ramones Tribute Concert</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Complete event visual identity featuring concert posters, ticket designs, social media content, and professional mockup presentations capturing the raw energy of punk rock.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-purple-600/80 text-white rounded-full text-sm backdrop-blur-sm">Event Design</span>
+                                    <span class="px-3 py-1 bg-pink-600/80 text-white rounded-full text-sm backdrop-blur-sm">Poster Design</span>
+                                    <span class="px-3 py-1 bg-blue-600/80 text-white rounded-full text-sm backdrop-blur-sm">Branding</span>
+                                </div>
+                                <a href="/projects/ramones-tribute-concert.html" class="inline-flex items-center text-white hover:text-purple-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 - Grind Theory -->
+                    <div class="project-card bg-white shadow-lg border border-gray-100" data-category="design">
+                        <div class="aspect-[16/10] relative">
+                            <img 
+                                src="https://res.cloudinary.com/drlifoeqc/image/upload/w_800,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                                alt="Grind Theory Project Mockup"
+                                class="w-full h-full object-cover"
+                                loading="lazy"
+                            >
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Grind Theory</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Concept skater clothing line merging Einstein's scientific genius with skateboarding culture. Features unique logo design and two distinct shirt concepts.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-purple-600/80 text-white rounded-full text-sm backdrop-blur-sm">Skater Apparel</span>
+                                    <span class="px-3 py-1 bg-pink-600/80 text-white rounded-full text-sm backdrop-blur-sm">Logo Design</span>
+                                    <span class="px-3 py-1 bg-blue-600/80 text-white rounded-full text-sm backdrop-blur-sm">Typography</span>
+                                </div>
+                                <a href="/projects/grind-theory.html" class="inline-flex items-center text-white hover:text-purple-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3 - Product Launch Video -->
+                    <div class="project-card bg-white rounded-2xl shadow-lg border border-gray-100" data-category="video">
+                        <div class="aspect-[4/3] relative bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="text-lg opacity-80">Promotional Video</p>
+                            </div>
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Product Launch Video</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Dynamic promotional video showcasing a new product launch with motion graphics and compelling storytelling.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-blue-600/80 text-white rounded-full text-sm backdrop-blur-sm">Video Editing</span>
+                                    <span class="px-3 py-1 bg-cyan-600/80 text-white rounded-full text-sm backdrop-blur-sm">Motion Graphics</span>
+                                </div>
+                                <a href="/projects/product-launch-video.html" class="inline-flex items-center text-white hover:text-blue-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 4 - Social Media Campaign -->
+                    <div class="project-card bg-white rounded-2xl shadow-lg border border-gray-100" data-category="social">
+                        <div class="aspect-[4/3] relative bg-gradient-to-br from-green-400 to-teal-400 rounded-2xl flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2M7 4h10l2 8H5l2-8zM11 12h2"/>
+                                </svg>
+                                <p class="text-lg opacity-80">Social Media Campaign</p>
+                            </div>
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Social Media Campaign</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Complete social media campaign with custom graphics, video content, and strategic posting schedule.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-green-600/80 text-white rounded-full text-sm backdrop-blur-sm">Social Media</span>
+                                    <span class="px-3 py-1 bg-teal-600/80 text-white rounded-full text-sm backdrop-blur-sm">Content Strategy</span>
+                                </div>
+                                <a href="/projects/social-media-campaign.html" class="inline-flex items-center text-white hover:text-green-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 5 - Marketing Collateral -->
+                    <div class="project-card bg-white shadow-lg border border-gray-100" data-category="design">
+                        <div class="aspect-[16/10] relative bg-gradient-to-br from-orange-400 to-red-400 flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                <p class="text-lg opacity-80">Print Design</p>
+                            </div>
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Marketing Collateral</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Professional print materials including brochures, flyers, and business cards with consistent branding.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-orange-600/80 text-white rounded-full text-sm backdrop-blur-sm">Print Design</span>
+                                    <span class="px-3 py-1 bg-red-600/80 text-white rounded-full text-sm backdrop-blur-sm">Marketing</span>
+                                </div>
+                                <a href="/projects/marketing-collateral.html" class="inline-flex items-center text-white hover:text-orange-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 6 - Documentary Film Edit -->
+                    <div class="project-card bg-white shadow-lg border border-gray-100" data-category="video">
+                        <div class="aspect-[16/10] relative bg-gradient-to-br from-indigo-400 to-purple-400 flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="text-lg opacity-80">Documentary Film</p>
+                            </div>
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Documentary Film Edit</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Professional editing of a 20-minute documentary with color grading, sound design, and narrative structure.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-indigo-600/80 text-white rounded-full text-sm backdrop-blur-sm">Documentary</span>
+                                    <span class="px-3 py-1 bg-purple-600/80 text-white rounded-full text-sm backdrop-blur-sm">Color Grading</span>
+                                </div>
+                                <a href="/projects/documentary-edit.html" class="inline-flex items-center text-white hover:text-indigo-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 7 - Instagram Content Series -->
+                    <div class="project-card bg-white shadow-lg border border-gray-100" data-category="social">
+                        <div class="aspect-[16/10] relative bg-gradient-to-br from-pink-400 to-rose-400 flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <svg class="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.987 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.448 16.988c-1.297 0-2.448-1.151-2.448-2.448s1.151-2.448 2.448-2.448 2.448 1.151 2.448 2.448-1.151 2.448-2.448 2.448zm7.138 0c-1.297 0-2.448-1.151-2.448-2.448s1.151-2.448 2.448-2.448 2.448 1.151 2.448 2.448-1.151 2.448-2.448 2.448z"/>
+                                </svg>
+                                <p class="text-lg opacity-80">Instagram Content</p>
+                            </div>
+                            <div class="project-overlay">
+                                <h3 class="text-2xl font-bold mb-3">Instagram Content Series</h3>
+                                <p class="text-gray-200 mb-4 leading-relaxed">Cohesive Instagram content series with custom graphics, stories, and reels for brand engagement.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-pink-600/80 text-white rounded-full text-sm backdrop-blur-sm">Instagram</span>
+                                    <span class="px-3 py-1 bg-rose-600/80 text-white rounded-full text-sm backdrop-blur-sm">Content Creation</span>
+                                </div>
+                                <a href="/projects/instagram-content.html" class="inline-flex items-center text-white hover:text-pink-300 font-semibold transition-colors">
+                                    View Project
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
