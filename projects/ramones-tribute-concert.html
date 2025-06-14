@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramones Tribute Concert - Event Design Project | Ramones Capulong</title>
-    <meta name="description" content="Ramones Tribute Concert event design project by Ramones Capulong - Complete visual identity including posters, tickets, and social media content">
+    <meta name="description" content="Complete event visual identity featuring concert posters, ticket designs, social media content, and professional mockup presentations capturing the raw energy of punk rock.">
     <link rel="icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">
     <link rel="shortcut icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -21,118 +21,60 @@
             width: 100%;
             overflow-x: hidden;
             background-color: white;
-        }
-        .fade-in { animation: fadeIn 0.6s ease-in; }
+        }        .fade-in { animation: fadeIn 0.6s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .image-zoom { transition: transform 0.3s ease; cursor: pointer; }
-        .image-zoom:hover { transform: scale(1.02); }        /* Lightbox Styles */
+        
+        /* Lightbox Styles */
         .lightbox {
+            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
             z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 20px;
-            box-sizing: border-box;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            cursor: pointer;
         }
         
         .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }        .lightbox-content {
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .lightbox-image {
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
             border-radius: 8px;
-            user-select: none;
-            display: block;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-          .lightbox-close {
-            position: fixed;
+        
+        .lightbox-close {
+            position: absolute;
             top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 30px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10001;
-        }        .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.2);
+            z-index: 10000;
+            transition: color 0.3s ease;
         }
-          /* Navigation arrows */
-        .lightbox-nav {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: 2px solid white;
-            font-size: 24px;
-            padding: 15px 20px;
+        
+        .lightbox-close:hover {
+            color: #ccc;
+        }
+        
+        .gallery-image {
             cursor: pointer;
-            border-radius: 8px;
-            z-index: 10001;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .lightbox-nav:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .lightbox-prev {
-            left: 20px;
-        }
-        
-        .lightbox-next {
-            right: 20px;
-        }        @media (max-width: 768px) {
-            .lightbox {
-                padding: 10px;
-            }
-            
-            .lightbox-content {
-                max-width: 98vw;
-                max-height: 90vh;
-            }
-            
-            .lightbox-nav {
-                font-size: 20px;
-                padding: 12px 16px;
-            }
-            
-            .lightbox-prev {
-                left: 5px;
-            }
-            
-            .lightbox-next {
-                right: 5px;
-            }
-            
-            .lightbox-close {
-                top: 5px;
-                right: 5px;
-                width: 45px;
-                height: 45px;
-                font-size: 25px;
-            }
+        .gallery-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -155,7 +97,7 @@
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
@@ -181,7 +123,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center text-white">
                     <div class="mb-4">
-                        <a href="/projects.html" class="inline-flex items-center text-purple-200 hover:text-white transition-colors">
+                        <a href="/projects.html" class="inline-flex items-center text-purple-100 hover:text-white transition-colors">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
@@ -206,7 +148,7 @@
         </section>
 
         <!-- Project Overview -->
-        <section class="py-20">
+        <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     <div class="lg:col-span-2">
@@ -219,41 +161,62 @@
                                 The design captures the raw energy and punk aesthetic of the Ramones while maintaining modern design principles. The visual identity spans across multiple touchpoints including concert posters, tickets, and social media content.
                             </p>
                         </div>
-                        
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Achievements</h3>
-                            <ul class="space-y-2 text-gray-600">
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+
+                        <!-- Key Achievements -->
+                        <div class="grid md:grid-cols-2 gap-6 mb-12">
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Complete visual identity system for event branding
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Complete visual identity system</h3>
+                                    <p class="text-gray-600 text-sm">for event branding</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Multiple poster variations (color and black & white)
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Multiple poster variations</h3>
+                                    <p class="text-gray-600 text-sm">(color and black & white)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Professional ticket design with mockup presentations
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Professional ticket design</h3>
+                                    <p class="text-gray-600 text-sm">with mockup presentations</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Social media content and promotional materials
-                                </li>
-                            </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Social media content</h3>
+                                    <p class="text-gray-600 text-sm">and promotional materials</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
                     <div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Project Details</h3>
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Project Details</h3>
                             <dl class="space-y-4">
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Client</dt>
@@ -270,12 +233,10 @@
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Deliverables</dt>
                                     <dd class="text-sm text-gray-900">
-                                        <ul class="mt-1 space-y-1">
-                                            <li>• Event Posters</li>
-                                            <li>• Ticket Designs</li>
-                                            <li>• Social Media Content</li>
-                                            <li>• Mockup Presentations</li>
-                                        </ul>
+                                        • Event Posters<br>
+                                        • Ticket Designs<br>
+                                        • Social Media Content<br>
+                                        • Mockup Presentations
                                     </dd>
                                 </div>
                             </dl>
@@ -286,7 +247,7 @@
         </section>
 
         <!-- Project Gallery -->
-        <section class="py-20 bg-white">
+        <section class="py-20 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Project Gallery</h2>
@@ -297,29 +258,25 @@
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-gray-900 mb-8">Concert Posters</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="fade-in">
-                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/poster1-web_iy9myc.webp" 
+                        <div class="fade-in">                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/poster1-web_iy9myc.webp" 
                                  alt="Ramones Tribute Concert Poster - Color Version" 
-                                 class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                                 loading="lazy">
+                                 class="w-full h-auto rounded-lg shadow-lg gallery-image">
                             <p class="text-center text-gray-600 mt-4 font-medium">Color Version</p>
                         </div>
-                        <div class="fade-in">
-                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/poster1-web-bw_kutvos.webp" 
+                        <div class="fade-in">                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/poster1-web-bw_kutvos.webp" 
                                  alt="Ramones Tribute Concert Poster - Black & White Version" 
-                                 class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                                 loading="lazy">
+                                 class="w-full h-auto rounded-lg shadow-lg gallery-image">
                             <p class="text-center text-gray-600 mt-4 font-medium">Black & White Version</p>
                         </div>
                     </div>
-                </div>                <!-- Mockup Presentation -->
+                </div>
+
+                <!-- Mockup Presentation -->
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-gray-900 mb-8">Poster Mockup</h3>
-                    <div class="fade-in">
-                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749833820/mockup1-web_laiqio.webp" 
+                    <div class="fade-in">                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749833820/mockup1-web_laiqio.webp" 
                              alt="Ramones Tribute Concert Poster Mockup Presentation" 
-                             class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                             loading="lazy">
+                             class="w-full h-auto rounded-lg shadow-lg gallery-image">
                         <p class="text-center text-gray-600 mt-4 font-medium">Professional Mockup Presentation</p>
                     </div>
                 </div>
@@ -328,26 +285,20 @@
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-gray-900 mb-8">Ticket Designs</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <div class="fade-in">
-                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832469/ticket1-web_mqsnis.webp" 
+                        <div class="fade-in">                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832469/ticket1-web_mqsnis.webp" 
                                  alt="Ramones Tribute Concert Ticket - Color Version" 
-                                 class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                                 loading="lazy">
+                                 class="w-full h-auto rounded-lg shadow-lg gallery-image">
                             <p class="text-center text-gray-600 mt-4 font-medium">Color Ticket Design</p>
                         </div>
-                        <div class="fade-in">
-                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832473/ticket1-web-bw_d0qozs.webp" 
+                        <div class="fade-in">                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832473/ticket1-web-bw_d0qozs.webp" 
                                  alt="Ramones Tribute Concert Ticket - Black & White Version" 
-                                 class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                                 loading="lazy">
+                                 class="w-full h-auto rounded-lg shadow-lg gallery-image">
                             <p class="text-center text-gray-600 mt-4 font-medium">Black & White Ticket Design</p>
                         </div>
                     </div>
-                    <div class="fade-in">
-                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832469/tickets-mockup_ryuzrj.jpg" 
+                    <div class="fade-in">                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832469/tickets-mockup_ryuzrj.jpg" 
                              alt="Ramones Tribute Concert Tickets Mockup" 
-                             class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                             loading="lazy">
+                             class="w-full h-auto rounded-lg shadow-lg gallery-image">
                         <p class="text-center text-gray-600 mt-4 font-medium">Tickets Mockup Presentation</p>
                     </div>
                 </div>
@@ -356,18 +307,14 @@
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-gray-900 mb-8">Social Media Content</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="fade-in">
-                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/content-post_qdkiiz.jpg" 
+                        <div class="fade-in">                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/content-post_qdkiiz.jpg" 
                                  alt="Ramones Tribute Concert Social Media Content Post" 
-                                 class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                                 loading="lazy">
+                                 class="w-full h-auto rounded-lg shadow-lg gallery-image">
                             <p class="text-center text-gray-600 mt-4 font-medium">Content Post Design</p>
                         </div>
-                        <div class="fade-in">
-                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832467/instagram-post-web_ysgsna.webp" 
+                        <div class="fade-in">                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1749832467/instagram-post-web_ysgsna.webp" 
                                  alt="Ramones Tribute Concert Instagram Post" 
-                                 class="w-full h-auto rounded-lg shadow-lg image-zoom lightbox-trigger"
-                                 loading="lazy">
+                                 class="w-full h-auto rounded-lg shadow-lg gallery-image">
                             <p class="text-center text-gray-600 mt-4 font-medium">Instagram Post Design</p>
                         </div>
                     </div>
@@ -375,8 +322,8 @@
             </div>
         </section>
 
-        <!-- Process Section (Optional) -->
-        <section class="py-20 bg-gray-50">
+        <!-- Design Process -->
+        <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Design Process</h2>
@@ -384,55 +331,63 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="text-center fade-in">
-                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Concept Development</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Concept Development</h3>
                         <p class="text-gray-600">Research and ideation phase focusing on capturing the Ramones' punk aesthetic while ensuring modern appeal</p>
                     </div>
                     
-                    <div class="text-center fade-in">
-                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Design Execution</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Design Execution</h3>
                         <p class="text-gray-600">Creating multiple design variations across different formats and ensuring consistency across all materials</p>
                     </div>
                     
-                    <div class="text-center fade-in">
-                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 110 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 010-2h4zM6 6v12h12V6H6zm3-2V2h6v2H9z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Final Presentation</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Final Presentation</h3>
                         <p class="text-gray-600">Professional mockups and presentation materials showcasing the designs in real-world contexts</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Next Project -->
-        <section class="py-20 bg-white">
+        <!-- Explore More Projects -->
+        <section class="py-20 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Explore More Projects</h2>
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Explore More Projects</h2>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <a href="/projects/grind-theory.html" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        <a href="/projects/grind-theory.html" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors">
                             Grind Theory Web Design
                         </a>
-                        <a href="/projects/brand-identity.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        <a href="/projects/brand-identity.html" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors">
                             Brand Identity Project
                         </a>
-                        <a href="/projects.html" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <a href="/projects.html" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors">
                             View All Projects
                         </a>
                     </div>
+                </div>
+                
+                <div class="text-center bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-12 text-white">
+                    <h3 class="text-3xl font-bold mb-4">Ready to collaborate?</h3>
+                    <p class="text-xl mb-8">Let's bring your creative vision to life with professional design solutions.</p>
+                    <a href="/contact.html" class="inline-flex items-center px-8 py-3 border border-white/20 text-base font-medium rounded-full text-white bg-white/10 hover:bg-white/20 transition-colors">
+                        Get In Touch
+                    </a>
                 </div>
             </div>
         </section>
@@ -442,13 +397,6 @@
     <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Ready to collaborate?</h3>
-                    <p class="text-gray-300 mb-4">Let's bring your creative vision to life with professional design solutions.</p>
-                    <a href="/contact.html" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors inline-block">
-                        Get In Touch
-                    </a>
-                </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Navigation</h4>
                     <ul class="space-y-2">
@@ -460,29 +408,31 @@
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2 text-gray-300">
-                        <li>Graphic Design</li>
-                        <li>Video Editing</li>
-                        <li>Social Media Management</li>
-                        <li>Brand Identity</li>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Graphic Design</li>
+                        <li class="text-gray-300">Video Editing</li>
+                        <li class="text-gray-300">Social Media Management</li>
+                        <li class="text-gray-300">Brand Identity</li>
                     </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <p class="text-gray-300 mb-4">Let's create something amazing together.</p>
+                    <a href="/contact.html" class="inline-flex items-center px-4 py-2 border border-white/20 text-sm font-medium rounded-full text-white bg-white/10 hover:bg-white/20 transition-colors">
+                        Get In Touch
+                    </a>
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-300">
                 <p>&copy; 2025 Ramones Capulong. All rights reserved.</p>
             </div>
-        </div>
-    </footer>    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-            <button class="lightbox-nav lightbox-prev" onclick="previousImage()">&#8249;</button>
-            <img id="lightbox-image" class="lightbox-image" src="" alt="">
-            <button class="lightbox-nav lightbox-next" onclick="nextImage()">&#8250;</button>
-        </div>
-    </div>
+        </div>    </footer>
 
-    <script>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>    <script>
         // Mobile menu toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
@@ -490,166 +440,44 @@
         });
 
         // Lightbox functionality
-        let currentImageIndex = 0;
-        const lightboxImages = [
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/poster1-web_iy9myc.webp',
-                alt: 'Ramones Tribute Concert Poster - Color Version'
-            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/poster1-web-bw_kutvos.webp',
-                alt: 'Ramones Tribute Concert Poster - Black & White Version'            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749833820/mockup1-web_laiqio.webp',
-                alt: 'Ramones Tribute Concert Poster Mockup Presentation'
-            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832469/ticket1-web_mqsnis.webp',
-                alt: 'Ramones Tribute Concert Ticket - Color Version'
-            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832473/ticket1-web-bw_d0qozs.webp',
-                alt: 'Ramones Tribute Concert Ticket - Black & White Version'
-            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832469/tickets-mockup_ryuzrj.jpg',
-                alt: 'Ramones Tribute Concert Tickets Mockup'
-            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832468/content-post_qdkiiz.jpg',
-                alt: 'Ramones Tribute Concert Social Media Content Post'
-            },
-            {
-                src: 'https://res.cloudinary.com/drlifoeqc/image/upload/v1749832467/instagram-post-web_ysgsna.webp',
-                alt: 'Ramones Tribute Concert Instagram Post'
-            }
-        ];        // Calculate optimal image size based on screen dimensions
-        function calculateOptimalImageSize() {
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
-            
-            // Leave space for controls and padding
-            const availableWidth = screenWidth - 120; // 60px padding on each side
-            const availableHeight = screenHeight - 120; // 60px padding top/bottom
-            
-            return {
-                maxWidth: availableWidth,
-                maxHeight: availableHeight
-            };
-        }
-
-        // Resize image to fit screen perfectly
-        function resizeImageToFit(img) {
-            const dimensions = calculateOptimalImageSize();
-            const lightboxContent = document.querySelector('.lightbox-content');
-            
-            // Set container size
-            lightboxContent.style.maxWidth = dimensions.maxWidth + 'px';
-            lightboxContent.style.maxHeight = dimensions.maxHeight + 'px';
-            lightboxContent.style.width = 'auto';
-            lightboxContent.style.height = 'auto';
-            
-            // Reset image styles
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            img.style.width = 'auto';
-            img.style.height = 'auto';
-            img.style.objectFit = 'contain';
-            
-            // Wait for image to load and then calculate exact size
-            img.onload = function() {
-                const imgAspectRatio = this.naturalWidth / this.naturalHeight;
-                const containerAspectRatio = dimensions.maxWidth / dimensions.maxHeight;
-                
-                if (imgAspectRatio > containerAspectRatio) {
-                    // Image is wider - constrain by width
-                    this.style.width = dimensions.maxWidth + 'px';
-                    this.style.height = 'auto';
-                } else {
-                    // Image is taller - constrain by height
-                    this.style.height = dimensions.maxHeight + 'px';
-                    this.style.width = 'auto';
-                }
-            };
-        }
-
-        // Open lightbox
-        function openLightbox(index) {
-            currentImageIndex = index;
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            
-            lightboxImage.src = lightboxImages[currentImageIndex].src;
-            lightboxImage.alt = lightboxImages[currentImageIndex].alt;
-            
-            // Calculate and apply optimal size
-            resizeImageToFit(lightboxImage);
-            
-            lightbox.classList.add('active');
-            
-            // Prevent body scroll
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close lightbox
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            
-            // Restore body scroll
-            document.body.style.overflow = 'auto';
-        }        // Previous image
-        function previousImage() {
-            currentImageIndex = (currentImageIndex - 1 + lightboxImages.length) % lightboxImages.length;
-            const lightboxImage = document.getElementById('lightbox-image');
-            lightboxImage.src = lightboxImages[currentImageIndex].src;
-            lightboxImage.alt = lightboxImages[currentImageIndex].alt;
-            
-            // Recalculate size for new image
-            resizeImageToFit(lightboxImage);
-        }
-
-        // Next image
-        function nextImage() {
-            currentImageIndex = (currentImageIndex + 1) % lightboxImages.length;
-            const lightboxImage = document.getElementById('lightbox-image');
-            lightboxImage.src = lightboxImages[currentImageIndex].src;
-            lightboxImage.alt = lightboxImages[currentImageIndex].alt;
-            
-            // Recalculate size for new image
-            resizeImageToFit(lightboxImage);
-        }
-
-        // Add click event to all lightbox triggers
         document.addEventListener('DOMContentLoaded', function() {
-            const triggers = document.querySelectorAll('.lightbox-trigger');
-            triggers.forEach((trigger, index) => {
-                trigger.addEventListener('click', () => openLightbox(index));
-            });
-        });
-
-        // Close lightbox on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowLeft') {
-                previousImage();
-            } else if (e.key === 'ArrowRight') {
-                nextImage();
-            }
-        });        // Close lightbox when clicking outside the image
-        document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLightbox();
-            }
-        });
-
-        // Recalculate image size when window is resized
-        window.addEventListener('resize', function() {
             const lightbox = document.getElementById('lightbox');
-            if (lightbox.classList.contains('active')) {
-                const lightboxImage = document.getElementById('lightbox-image');
-                resizeImageToFit(lightboxImage);
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            const closeBtn = document.querySelector('.lightbox-close');
+
+            // Add click event to all gallery images
+            galleryImages.forEach(function(img) {
+                img.addEventListener('click', function() {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = this.src;
+                    lightboxImg.alt = this.alt;
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                });
+            });
+
+            // Close lightbox when clicking close button
+            closeBtn.addEventListener('click', function() {
+                closeLightbox();
+            });
+
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scrolling
             }
         });
     </script>

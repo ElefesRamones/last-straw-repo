@@ -2,261 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Grind Theory - Web Design Project | Ramones Capulong</title>
-    <meta name="description" content="Grind Theory web design project by Ramones Capulong - Modern UI/UX design with clean aesthetics and user-focused interface">
-    <link rel="icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">
-    <link rel="shortcut icon" type="image/png" href="/assets/images/logo/portfolio-logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grind Theory - Portfolio | Ramones Capulong</title>
+    <meta name="description" content="Grind Theory - A concept skater clothing line that combines science and skateboarding culture. Logo design, apparel design, and typography by Ramones Capulong.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Grind Theory - Portfolio | Ramones Capulong">
+    <meta property="og:description" content="A concept skater clothing line that combines science and skateboarding culture. Logo design, apparel design, and typography.">
+    <meta property="og:image" content="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_630,q_auto,f_auto/Mockup-one-web_uysett.webp">
+    <meta property="og:url" content="https://www.ramonescapulong.com/projects/grind-theory.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Grind Theory - Portfolio | Ramones Capulong">
+    <meta name="twitter:description" content="A concept skater clothing line that combines science and skateboarding culture. Logo design, apparel design, and typography.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_630,q_auto,f_auto/Mockup-one-web_uysett.webp">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/images/logo/portfolio-logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/cloudinary-config.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
-        * { box-sizing: border-box; }
-        html, body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-            background-color: white;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
         }
-        .fade-in { animation: fadeIn 0.6s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .image-zoom { transition: transform 0.3s ease; cursor: pointer; }
-        .image-zoom:hover { transform: scale(1.02); }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+          .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
         
         /* Lightbox Styles */
         .lightbox {
+            display: none;
             position: fixed;
-            top: 0;
+            z-index: 9999;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            background-color: rgba(0,0,0,0.9);
+            cursor: pointer;
         }
         
         .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .lightbox img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
             border-radius: 8px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-        }        .lightbox-close {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
             position: absolute;
-            top: 0;
-            right: -80px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 10000;
+            transition: color 0.3s ease;
         }
         
         .lightbox-close:hover {
-            background: rgba(0, 0, 0, 0.9);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-          .lightbox-close svg {
-            width: 20px;
-            height: 20px;
-            color: white;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-            display: block;
-            margin: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            color: #ccc;
         }
         
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .gallery-image {
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .lightbox-nav:hover {
-            background: rgba(0, 0, 0, 0.9);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-50%) scale(1.1);
-        }
-          .lightbox-nav svg {
-            width: 24px;
-            height: 24px;
-            color: white;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2.5;
-            display: block;
-            margin: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-          .lightbox-prev {
-            left: -80px;
-        }
-        
-        .lightbox-next {
-            right: -80px;
-        }
-          /* Responsive adjustments for smaller screens */
-        @media (max-width: 768px) {
-            .lightbox-prev {
-                left: 10px;
-            }
-            
-            .lightbox-next {
-                right: 10px;
-            }
-              .lightbox-close {
-                top: 0;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .lightbox-close svg {
-                width: 16px;
-                height: 16px;
-            }
-            
-            .lightbox-nav {
-                width: 48px;
-                height: 48px;
-            }
-            
-            .lightbox-nav svg {
-                width: 20px;
-                height: 20px;
-            }
-        }
-        
-        .lightbox-description {
-            display: none; /* Hidden to prevent blocking images */
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .gallery-item {
-            position: relative;
-            aspect-ratio: 4/3;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-        
-        .zoom-icon {
-            color: white;
-            width: 24px;
-            height: 24px;
+        .gallery-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-gray-50 text-gray-900 font-sans">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">                <div class="flex-shrink-0">
-                    <a href="/" class="flex items-center">
-                        <img src="/assets/images/logo/portfolio-logo.png" alt="Ramones Capulong" class="h-10 w-auto">
-                    </a>
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <img src="../assets/images/logo/portfolio-logo.png" alt="Ramones Capulong Logo" class="h-8 w-8">
+                    <span class="font-bold text-xl text-gray-900">Ramones Capulong</span>
                 </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
-                        <a href="/about.html" class="text-gray-600 hover:text-gray-900 transition-colors">About Me</a>
-                        <a href="/projects.html" class="text-gray-900 hover:text-gray-600 transition-colors font-medium">Projects</a>
-                        <a href="/contact.html" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
-                    </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-gray-700 hover:text-purple-600 transition-colors">Home</a>
+                    <a href="../about.html" class="text-gray-700 hover:text-purple-600 transition-colors">About</a>
+                    <a href="../projects.html" class="text-purple-600 font-medium">Projects</a>
+                    <a href="../contact.html" class="text-gray-700 hover:text-purple-600 transition-colors">Contact</a>
                 </div>
-                <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
@@ -264,265 +144,198 @@
             </div>
         </div>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="/" class="block px-3 py-2 text-gray-600 hover:text-gray-900">Home</a>
-                <a href="/about.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">About Me</a>
-                <a href="/projects.html" class="block px-3 py-2 text-gray-900 font-medium">Projects</a>
-                <a href="/contact.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-1">
+                <a href="../index.html" class="block py-2 text-gray-700 hover:text-purple-600">Home</a>
+                <a href="../about.html" class="block py-2 text-gray-700 hover:text-purple-600">About</a>
+                <a href="../projects.html" class="block py-2 text-purple-600 font-medium">Projects</a>
+                <a href="../contact.html" class="block py-2 text-gray-700 hover:text-purple-600">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Project Hero Section -->
-    <main class="pt-16">
-        <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Back to Projects -->
-                <div class="mb-8">
-                    <a href="/projects.html" class="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                        Back to Projects
-                    </a>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <!-- Project Info -->
-                    <div class="fade-in">                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Skater Apparel</span>
-                            <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">Logo Design</span>
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Typography</span>
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="hero-gradient py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-white fade-in">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Grind Theory</h1>
+                        <p class="text-xl mb-8 text-white/90">A concept skater clothing line that combines science and skateboarding culture. Inspired by the name "Grind Theory," this project explores the intersection of intellectual curiosity and street skating through creative apparel designs featuring an Einstein skateboard motif and modern mechanical typography.</p>
+                        
+                        <!-- Project Details -->
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">CLIENT</h3>
+                                <p class="text-white">Concept Project</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">YEAR</h3>
+                                <p class="text-white">2025</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">SERVICES</h3>
+                                <p class="text-white">Logo Design, Apparel Design, Typography</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">DURATION</h3>
+                                <p class="text-white">4 Weeks</p>
+                            </div>
                         </div>
                         
-                        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">Grind Theory</h1>                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                            A concept skater clothing line that combines science and skateboarding culture. Inspired by the name "Grind Theory," 
-                            this project explores the intersection of intellectual curiosity and street skating through creative apparel designs 
-                            featuring an Einstein skateboard motif and modern mechanical typography.
-                        </p>
-
-                        <!-- Project Details -->
-                        <div class="grid grid-cols-2 gap-6 mb-8">                            <div>
-                                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Client</h3>
-                                <p class="text-gray-600">Concept Project</p>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Year</h3>
-                                <p class="text-gray-600">2025</p>
-                            </div>                            <div>
-                                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Services</h3>
-                                <p class="text-gray-600">Logo Design, Apparel Design, Typography</p>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-2">Duration</h3>
-                                <p class="text-gray-600">4 Weeks</p>
-                            </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="../contact.html" class="bg-white text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Start Your Project</a>
+                            <a href="../projects.html" class="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-purple-600 transition-colors">View More Work</a>
                         </div>
-
-                        <!-- CTA Button -->
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="/contact.html" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 font-medium">
-                                Start Your Project
-                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                            <a href="/projects.html" class="inline-flex items-center px-8 py-3 border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-lg transition-colors font-medium">
-                                View More Work
-                            </a>
-                        </div>
-                    </div>                    <!-- Hero Image -->
-                    <div class="fade-in">                        <div class="relative gallery-item" data-image="https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/Mockup-one-web_uysett.webp">
-                            <img 
-                                src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_800,h_600,q_auto,f_auto/Mockup-one-web_uysett.webp" 
-                                alt="Grind Theory Project Mockup - Professional Presentation"
-                                class="w-full rounded-2xl shadow-2xl image-zoom"
-                                loading="eager"
-                            >
-                            <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
-                            <div class="gallery-overlay" style="border-radius: 1rem;">
-                                <svg class="zoom-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                                </svg>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="fade-in stagger-2">                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_800,h_600,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                             alt="Grind Theory Project Mockup - Professional Presentation" 
+                             class="rounded-2xl shadow-2xl w-full gallery-image">
                     </div>
                 </div>
             </div>
-        </section>        <!-- Project Details -->
+        </section>
+
+        <!-- Main Design Section -->
         <section class="py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <!-- Hero Image -->
-                <div class="mb-20">
-                    <div class="aspect-video rounded-2xl overflow-hidden shadow-xl">
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_675,q_auto,f_auto/Mockup-one-web_uysett.webp" 
-                            alt="Grind Theory Main Design"
-                            class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(0)"
-                        >
-                    </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_675,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                         alt="Grind Theory Main Design" 
+                         class="rounded-2xl shadow-lg mx-auto gallery-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Einstein Meets Skateboarding Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Einstein Meets Skateboarding</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">A concept skater clothing line merging scientific genius with street culture. Two unique designs featuring cyberpunk aesthetics and Filipino revolutionary themes.</p>
                 </div>
 
-                <!-- Brief Overview -->
-                <div class="text-center mb-20">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Einstein Meets Skateboarding</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        A concept skater clothing line merging scientific genius with street culture. 
-                        Two unique designs featuring cyberpunk aesthetics and Filipino revolutionary themes.
-                    </p>
-                </div>                <!-- Design Showcase -->
-                <div class="grid lg:grid-cols-2 gap-16 mb-20">                    <div>
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-cyberpunk-web_otd14a.webp" 
-                            alt="Cyberpunk Neon Design"
-                            class="w-full h-auto rounded-2xl shadow-lg mb-6 cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(1)"
-                        >
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Cyberpunk Einstein</h3>
+                <div class="grid md:grid-cols-2 gap-12 mb-16">
+                    <div class="fade-in stagger-1">                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-cyberpunk-web_otd14a.webp" 
+                             alt="Cyberpunk Neon Design" 
+                             class="rounded-2xl shadow-lg w-full mb-6 gallery-image">
+                        <h3 class="text-2xl font-bold mb-4">Cyberpunk Einstein</h3>
                         <p class="text-gray-600">Neon-powered logo design combining scientific innovation with futuristic skateboarding aesthetics.</p>
                     </div>
-                      <div>
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-revolution-web_exwllv.webp" 
-                            alt="Vaporwave Filipino Design"
-                            class="w-full h-auto rounded-2xl shadow-lg mb-6 cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(2)"
-                        >
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Vaporwave Revolution</h3>
+                    <div class="fade-in stagger-2">                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-revolution-web_exwllv.webp" 
+                             alt="Vaporwave Filipino Design" 
+                             class="rounded-2xl shadow-lg w-full mb-6 gallery-image">
+                        <h3 class="text-2xl font-bold mb-4">Vaporwave Revolution</h3>
                         <p class="text-gray-600">Synthwave grids meet Filipino hero Andres Bonifacio with historic Katipunan sun symbolism.</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Process -->
-                <div class="mb-20">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Creative Process</h2>
-                        <p class="text-lg text-gray-600">From concept to final design</p>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-purple-600 font-bold text-xl">1</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900 mb-2">Concept</h4>
-                            <p class="text-gray-600 text-sm">Einstein + skateboarding fusion</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-blue-600 font-bold text-xl">2</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900 mb-2">Logo</h4>
-                            <p class="text-gray-600 text-sm">Multiple iterations to perfection</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-green-600 font-bold text-xl">3</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900 mb-2">Designs</h4>
-                            <p class="text-gray-600 text-sm">Two unique shirt concepts</p>
-                        </div>
-                    </div>
+        <!-- Creative Process Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Creative Process</h2>
+                    <p class="text-xl text-gray-600">From concept to final design</p>
                 </div>
 
-                <!-- Brand Identity -->
-                <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Brand Identity</h2>
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-bold text-gray-900 mb-2">The Challenge</h4>
-                                <p class="text-gray-600">Merge intellectual scientific theory with rebellious skateboarding culture.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-900 mb-2">The Solution</h4>
-                                <p class="text-gray-600">Einstein skateboard logo with modern mechanical typography and cultural fusion designs.</p>
-                            </div>
-                        </div>
-                    </div>                    <div>
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749317473/grind-logo_bevtff.png" 
-                            alt="Brand Identity Design"
-                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(3)"
-                        >
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center fade-in stagger-1">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                        <h4 class="text-xl font-bold mb-4">Concept</h4>
+                        <p class="text-gray-600">Einstein + skateboarding fusion</p>
+                    </div>
+                    <div class="text-center fade-in stagger-2">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                        <h4 class="text-xl font-bold mb-4">Logo</h4>
+                        <p class="text-gray-600">Multiple iterations to perfection</p>
+                    </div>
+                    <div class="text-center fade-in stagger-3">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                        <h4 class="text-xl font-bold mb-4">Designs</h4>
+                        <p class="text-gray-600">Two unique shirt concepts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Identity Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Brand Identity</h2>
+                    <p class="text-xl text-gray-600">Click on any image to view in full size</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="fade-in stagger-1">
+                        <h4 class="text-xl font-bold mb-4">The Challenge</h4>
+                        <p class="text-gray-600 mb-6">Merge intellectual scientific theory with rebellious skateboarding culture.</p>
+                        
+                        <h4 class="text-xl font-bold mb-4">The Solution</h4>
+                        <p class="text-gray-600">Einstein skateboard logo with modern mechanical typography and cultural fusion designs.</p>
+                    </div>
+                    <div class="fade-in stagger-2">                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749317473/grind-logo_bevtff.png" 
+                             alt="Brand Identity Design" 
+                             class="rounded-2xl shadow-lg w-full gallery-image">
                     </div>
                 </div>
 
                 <!-- Tools & Results -->
-                <div class="grid md:grid-cols-2 gap-12 mb-20">
-                    <div class="bg-gray-50 rounded-2xl p-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Tools Used</h3>
+                <div class="grid md:grid-cols-2 gap-12 mb-16">
+                    <div class="fade-in stagger-1">
+                        <h3 class="text-2xl font-bold mb-6">Tools Used</h3>
                         <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-white text-gray-800 rounded-lg font-medium shadow-sm">Adobe Photoshop</span>
-                            <span class="px-4 py-2 bg-white text-gray-800 rounded-lg font-medium shadow-sm">Adobe Illustrator</span>
-                            <span class="px-4 py-2 bg-white text-gray-800 rounded-lg font-medium shadow-sm">Canva</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Adobe Photoshop</span>
+                            <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">Adobe Illustrator</span>
+                            <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium">Canva</span>
                         </div>
                     </div>
-                    
-                    <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Results</h3>
-                        <div class="grid grid-cols-2 gap-4 text-center">
-                            <div>
-                                <div class="text-2xl font-bold text-purple-600 mb-1">2</div>
-                                <p class="text-gray-600 text-sm">Shirt Designs</p>
+                    <div class="fade-in stagger-2">
+                        <h3 class="text-2xl font-bold mb-6">Results</h3>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">2</div>
+                                <p class="text-gray-600">Shirt Designs</p>
                             </div>
-                            <div>
-                                <div class="text-2xl font-bold text-blue-600 mb-1">1</div>
-                                <p class="text-gray-600 text-sm">Iconic Logo</p>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">1</div>
+                                <p class="text-gray-600">Iconic Logo</p>
                             </div>
                         </div>
-                    </div>
-                </div>                <!-- Additional Content Gallery -->
-                <div class="mb-20">
-                    <div class="text-center mb-12">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Additional Designs</h3>
-                        <p class="text-gray-600">Exploring the complete design system</p>
-                    </div>                    
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/pre-order-ad-web_ejhliu.webp" 
-                            alt="Pre-Order Advertisement"
-                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(4)"
-                        >
-                        
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt2-combo-web_blj8st.webp" 
-                            alt="Shirt Design 2 Combination"
-                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(5)"
-                        >
-                        
-                        <img 
-                            src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt1-combo-web_bkd6ep.webp" 
-                            alt="Shirt Design 1 Combination"
-                            class="w-full h-auto rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform duration-500"
-                            onclick="openLightbox(6)"
-                        >
                     </div>
                 </div>
 
+                <!-- Additional Designs -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-center">Additional Designs</h3>
+                    <p class="text-gray-600 text-center mb-12">Exploring the complete design system</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div>                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/pre-order-ad-web_ejhliu.webp" 
+                                 alt="Pre-Order Advertisement" 
+                                 class="rounded-2xl shadow-lg w-full gallery-image">
+                        </div>
+                        <div>                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt2-combo-web_blj8st.webp" 
+                                 alt="Shirt Design 2 Combination" 
+                                 class="rounded-2xl shadow-lg w-full gallery-image">
+                        </div>
+                        <div>                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt1-combo-web_bkd6ep.webp" 
+                                 alt="Shirt Design 1 Combination" 
+                                 class="rounded-2xl shadow-lg w-full gallery-image">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Next Project -->
-        <section class="py-20 bg-gray-50">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">What's Next?</h2>
-                    <p class="text-lg text-gray-600">Ready to start your own project?</p>
-                </div>
-                
-                <div class="text-center">
-                    <a href="/contact.html" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 font-medium text-lg">
+        <!-- Call to Action Section -->
+        <section class="py-20 bg-gradient-to-br from-purple-600 to-blue-600">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">What's Next?</h2>
+                    <p class="text-xl text-white/90 mb-8">Ready to start your own project?</p>
+                    <a href="../contact.html" class="inline-block bg-white text-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">
                         Let's Work Together
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
                     </a>
                 </div>
             </div>
@@ -531,178 +344,78 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h3 class="text-2xl font-semibold mb-4">Ramones Capulong</h3>
-                <p class="text-gray-400 mb-6">Creative Professional | Graphic Designer | Video Editor</p>
-                <div class="mt-8 pt-8 border-t border-gray-800">
-                    <p class="text-gray-400 text-sm">© 2025 Ramones Capulong. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Ramones Capulong</h3>
+                    <p class="text-gray-400">Creative Professional | Graphic Designer | Video Editor</p>
+                </div>
+                <div class="md:text-right">
+                    <nav class="flex flex-wrap gap-6 md:justify-end">
+                        <a href="../index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                        <a href="../about.html" class="text-gray-400 hover:text-white transition-colors">About Me</a>
+                        <a href="../projects.html" class="text-gray-400 hover:text-white transition-colors">Projects</a>
+                        <a href="../contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </nav>
                 </div>
             </div>
-        </div>    </footer>    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
-                <svg viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-            
-            <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">
-                <svg viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
-            </button>
-            
-            <img id="lightbox-image" src="" alt="" />
-            
-            <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image">
-                <svg viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
-            </button>
-        </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Ramones Capulong. All rights reserved.</p>
+            </div>
+            <div class="text-center mt-4">
+                <a href="../projects.html" class="text-purple-400 hover:text-purple-300 transition-colors">← Back to Projects</a>
+            </div>
+        </div>    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
     </div>
 
-    <script src="/js/main.js"></script>    <script>        // Global variables for lightbox functionality
-        let currentImageIndex = 0;
-        let images = [];
-        let lightbox, lightboxImage, lightboxClose, lightboxPrev, lightboxNext;
-        
-        // Global function to open lightbox (called by onclick handlers)
-        function openLightbox(index) {
-            currentImageIndex = index;
-            if (images[currentImageIndex]) {
-                const currentImage = images[currentImageIndex];
-                lightboxImage.src = currentImage.url;
-                lightboxImage.alt = currentImage.alt;
-                
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        
-        // Lightbox Functionality with Dynamic Gallery Population
+    <script>
+        // Lightbox functionality
         document.addEventListener('DOMContentLoaded', function() {
-            lightbox = document.getElementById('lightbox');
-            lightboxImage = document.getElementById('lightbox-image');
-            lightboxClose = document.getElementById('lightbox-close');
-            lightboxPrev = document.getElementById('lightbox-prev');
-            lightboxNext = document.getElementById('lightbox-next');
-            const galleryContainer = document.getElementById('project-gallery');
-              // Define all images for lightbox navigation
-            images = [
-                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/Mockup-one-web_uysett.webp',
-                    alt: 'Grind Theory Main Design'
-                },
-                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749314662/concept-cyberpunk-web_otd14a.webp',
-                    alt: 'Cyberpunk Neon Design'
-                },
-                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749314662/concept-revolution-web_exwllv.webp',
-                    alt: 'Vaporwave Filipino Design'
-                },                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749317473/grind-logo_bevtff.png',
-                    alt: 'Brand Identity Design'
-                },
-                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749304333/pre-order-ad-web_ejhliu.webp',
-                    alt: 'Pre-Order Advertisement'
-                },
-                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749304333/shirt2-combo-web_blj8st.webp',
-                    alt: 'Shirt Design 2 Combination'
-                },
-                {
-                    url: 'https://res.cloudinary.com/drlifoeqc/image/upload/c_limit,w_1200,h_900,q_auto,f_auto/v1749304333/shirt1-combo-web_bkd6ep.webp',
-                    alt: 'Shirt Design 1 Combination'
-                }
-            ];
-            // Setup lightbox functionality
-            function setupLightbox() {
-                const galleryItems = document.querySelectorAll('.gallery-item');
-                
-                // Collect any remaining gallery images (if any exist)
-                galleryItems.forEach((item, index) => {
-                    const fullSizeUrl = item.dataset.image;
-                    const alt = item.querySelector('img').alt;
-                    
-                    // Only add if not already in images array
-                    const existingImageIndex = images.findIndex(img => img.url === fullSizeUrl);
-                    if (existingImageIndex === -1) {
-                        images.push({ 
-                            url: fullSizeUrl, 
-                            alt: alt
-                        });
-                    }
-                    
-                    // Add click event to open lightbox
-                    item.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const imageIndex = images.findIndex(img => img.url === fullSizeUrl);
-                        if (imageIndex !== -1) {
-                            openLightbox(imageIndex);
-                        }
-                    });
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            const closeBtn = document.querySelector('.lightbox-close');
+
+            // Add click event to all gallery images
+            galleryImages.forEach(function(img) {
+                img.addEventListener('click', function() {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = this.src;
+                    lightboxImg.alt = this.alt;
+                    document.body.style.overflow = 'hidden';
                 });
-                
-                // Hide navigation arrows if only one image
-                if (images.length <= 1) {
-                    lightboxPrev.style.display = 'none';
-                    lightboxNext.style.display = 'none';
-                } else {
-                    lightboxPrev.style.display = 'block';
-                    lightboxNext.style.display = 'block';
-                }
-            }
-            
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Restore scrolling
-            }
-              function showPrevImage() {
-                currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
-                openLightbox(currentImageIndex);
-            }
-            
-            function showNextImage() {
-                currentImageIndex = currentImageIndex < images.length - 1 ? currentImageIndex + 1 : 0;
-                openLightbox(currentImageIndex);
-            }
-            
-            // Event listeners
-            lightboxClose.addEventListener('click', closeLightbox);
-            lightboxPrev.addEventListener('click', showPrevImage);
-            lightboxNext.addEventListener('click', showNextImage);
-            
+            });
+
+            // Close lightbox when clicking close button
+            closeBtn.addEventListener('click', function() {
+                closeLightbox();
+            });
+
             // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', function(e) {
                 if (e.target === lightbox) {
                     closeLightbox();
                 }
             });
-            
-            // Keyboard navigation
+
+            // Close lightbox with Escape key
             document.addEventListener('keydown', function(e) {
-                if (!lightbox.classList.contains('active')) return;
-                
-                switch(e.key) {
-                    case 'Escape':
-                        closeLightbox();
-                        break;
-                    case 'ArrowLeft':
-                        showPrevImage();
-                        break;
-                    case 'ArrowRight':
-                        showNextImage();
-                        break;
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
                 }
-            });            
-            // Initialize lightbox functionality
-            setupLightbox();
+            });
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         });
     </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>
