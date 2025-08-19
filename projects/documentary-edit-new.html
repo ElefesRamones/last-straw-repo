@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentary Film Edit - Portfolio | Ramones Capulong</title>
+    <meta name="description" content="Documentary Film Edit - Professional editing of a 20-minute documentary with color grading, sound design, and narrative structure by Ramones Capulong.">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/images/logo/portfolio-logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <img src="../assets/images/logo/portfolio-logo.png" alt="Ramones Capulong Logo" class="h-8 w-8">
+                    <span class="font-bold text-xl text-gray-900">Ramones Capulong</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-gray-700 hover:text-purple-600 transition-colors">Home</a>
+                    <a href="../about.html" class="text-gray-700 hover:text-purple-600 transition-colors">About</a>
+                    <a href="../projects.html" class="text-purple-600 font-medium">Projects</a>
+                    <a href="../contact.html" class="text-gray-700 hover:text-purple-600 transition-colors">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-1">
+                <a href="../index.html" class="block py-2 text-gray-700 hover:text-purple-600">Home</a>
+                <a href="../about.html" class="block py-2 text-gray-700 hover:text-purple-600">About</a>
+                <a href="../projects.html" class="block py-2 text-purple-600 font-medium">Projects</a>
+                <a href="../contact.html" class="block py-2 text-gray-700 hover:text-purple-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="hero-gradient py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="text-white fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Documentary Film Edit</h1>
+                    <p class="text-xl text-white/90 mb-8">Professional editing of a 20-minute documentary with color grading, sound design, and narrative structure.</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span class="bg-white/20 text-white px-4 py-2 rounded-full text-sm">Documentary</span>
+                        <span class="bg-white/20 text-white px-4 py-2 rounded-full text-sm">Color Grading</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coming Soon Section -->
+        <section class="py-32 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <svg class="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4">Project Details Coming Soon</h2>
+                    <p class="text-xl text-gray-600 mb-8">This project page is currently being updated with detailed case study information, process insights, and visual showcase.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="../projects.html" class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                            ← Back to Projects
+                        </a>
+                        <a href="../contact.html" class="border border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-colors">
+                            Start Your Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Let's Create Something Amazing</h3>
+                    <p class="text-gray-400">Ready to bring your vision to life? Let's collaborate.</p>
+                </div>
+                <div class="md:text-right">
+                    <nav class="flex flex-wrap gap-6 md:justify-end">
+                        <a href="../index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                        <a href="../about.html" class="text-gray-400 hover:text-white transition-colors">About Me</a>
+                        <a href="../projects.html" class="text-gray-400 hover:text-white transition-colors">Projects</a>
+                        <a href="../contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Ramones Capulong. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grind Theory - Portfolio | Ramones Capulong</title>
+    <meta name="description" content="Grind Theory - A concept skater clothing line that combines science and skateboarding culture. Logo design, apparel design, and typography by Ramones Capulong.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Grind Theory - Portfolio | Ramones Capulong">
+    <meta property="og:description" content="A concept skater clothing line that combines science and skateboarding culture. Logo design, apparel design, and typography.">
+    <meta property="og:image" content="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_630,q_auto,f_auto/Mockup-one-web_uysett.webp">
+    <meta property="og:url" content="https://www.ramonescapulong.com/projects/grind-theory.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Grind Theory - Portfolio | Ramones Capulong">
+    <meta name="twitter:description" content="A concept skater clothing line that combines science and skateboarding culture. Logo design, apparel design, and typography.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_630,q_auto,f_auto/Mockup-one-web_uysett.webp">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/images/logo/portfolio-logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <img src="../assets/images/logo/portfolio-logo.png" alt="Ramones Capulong Logo" class="h-8 w-8">
+                    <span class="font-bold text-xl text-gray-900">Ramones Capulong</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-gray-700 hover:text-purple-600 transition-colors">Home</a>
+                    <a href="../about.html" class="text-gray-700 hover:text-purple-600 transition-colors">About</a>
+                    <a href="../projects.html" class="text-purple-600 font-medium">Projects</a>
+                    <a href="../contact.html" class="text-gray-700 hover:text-purple-600 transition-colors">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-1">
+                <a href="../index.html" class="block py-2 text-gray-700 hover:text-purple-600">Home</a>
+                <a href="../about.html" class="block py-2 text-gray-700 hover:text-purple-600">About</a>
+                <a href="../projects.html" class="block py-2 text-purple-600 font-medium">Projects</a>
+                <a href="../contact.html" class="block py-2 text-gray-700 hover:text-purple-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="hero-gradient py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-white fade-in">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Grind Theory</h1>
+                        <p class="text-xl mb-8 text-white/90">A concept skater clothing line that combines science and skateboarding culture. Inspired by the name "Grind Theory," this project explores the intersection of intellectual curiosity and street skating through creative apparel designs featuring an Einstein skateboard motif and modern mechanical typography.</p>
+                        
+                        <!-- Project Details -->
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">CLIENT</h3>
+                                <p class="text-white">Concept Project</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">YEAR</h3>
+                                <p class="text-white">2025</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">SERVICES</h3>
+                                <p class="text-white">Logo Design, Apparel Design, Typography</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-2 text-white/80">DURATION</h3>
+                                <p class="text-white">4 Weeks</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <a href="../contact.html" class="bg-white text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">Start Your Project</a>
+                            <a href="../projects.html" class="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-purple-600 transition-colors">View More Work</a>
+                        </div>
+                    </div>
+                    <div class="fade-in stagger-2">
+                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_800,h_600,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                             alt="Grind Theory Project Mockup - Professional Presentation" 
+                             class="rounded-2xl shadow-2xl w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Design Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/c_fill,w_1200,h_675,q_auto,f_auto/Mockup-one-web_uysett.webp" 
+                         alt="Grind Theory Main Design" 
+                         class="rounded-2xl shadow-lg mx-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- Einstein Meets Skateboarding Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Einstein Meets Skateboarding</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">A concept skater clothing line merging scientific genius with street culture. Two unique designs featuring cyberpunk aesthetics and Filipino revolutionary themes.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 mb-16">
+                    <div class="fade-in stagger-1">
+                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-cyberpunk-web_otd14a.webp" 
+                             alt="Cyberpunk Neon Design" 
+                             class="rounded-2xl shadow-lg w-full mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Cyberpunk Einstein</h3>
+                        <p class="text-gray-600">Neon-powered logo design combining scientific innovation with futuristic skateboarding aesthetics.</p>
+                    </div>
+                    <div class="fade-in stagger-2">
+                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749314662/concept-revolution-web_exwllv.webp" 
+                             alt="Vaporwave Filipino Design" 
+                             class="rounded-2xl shadow-lg w-full mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Vaporwave Revolution</h3>
+                        <p class="text-gray-600">Synthwave grids meet Filipino hero Andres Bonifacio with historic Katipunan sun symbolism.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creative Process Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Creative Process</h2>
+                    <p class="text-xl text-gray-600">From concept to final design</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center fade-in stagger-1">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                        <h4 class="text-xl font-bold mb-4">Concept</h4>
+                        <p class="text-gray-600">Einstein + skateboarding fusion</p>
+                    </div>
+                    <div class="text-center fade-in stagger-2">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                        <h4 class="text-xl font-bold mb-4">Logo</h4>
+                        <p class="text-gray-600">Multiple iterations to perfection</p>
+                    </div>
+                    <div class="text-center fade-in stagger-3">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                        <h4 class="text-xl font-bold mb-4">Designs</h4>
+                        <p class="text-gray-600">Two unique shirt concepts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Identity Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">Brand Identity</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="fade-in stagger-1">
+                        <h4 class="text-xl font-bold mb-4">The Challenge</h4>
+                        <p class="text-gray-600 mb-6">Merge intellectual scientific theory with rebellious skateboarding culture.</p>
+                        
+                        <h4 class="text-xl font-bold mb-4">The Solution</h4>
+                        <p class="text-gray-600">Einstein skateboard logo with modern mechanical typography and cultural fusion designs.</p>
+                    </div>
+                    <div class="fade-in stagger-2">
+                        <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_600,q_auto,f_auto/v1749317473/grind-logo_bevtff.png" 
+                             alt="Brand Identity Design" 
+                             class="rounded-2xl shadow-lg w-full">
+                    </div>
+                </div>
+
+                <!-- Tools & Results -->
+                <div class="grid md:grid-cols-2 gap-12 mb-16">
+                    <div class="fade-in stagger-1">
+                        <h3 class="text-2xl font-bold mb-6">Tools Used</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Adobe Photoshop</span>
+                            <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">Adobe Illustrator</span>
+                            <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium">Canva</span>
+                        </div>
+                    </div>
+                    <div class="fade-in stagger-2">
+                        <h3 class="text-2xl font-bold mb-6">Results</h3>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">2</div>
+                                <p class="text-gray-600">Shirt Designs</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">1</div>
+                                <p class="text-gray-600">Iconic Logo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Designs -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-center">Additional Designs</h3>
+                    <p class="text-gray-600 text-center mb-12">Exploring the complete design system</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div>
+                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/pre-order-ad-web_ejhliu.webp" 
+                                 alt="Pre-Order Advertisement" 
+                                 class="rounded-2xl shadow-lg w-full">
+                        </div>
+                        <div>
+                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt2-combo-web_blj8st.webp" 
+                                 alt="Shirt Design 2 Combination" 
+                                 class="rounded-2xl shadow-lg w-full">
+                        </div>
+                        <div>
+                            <img src="https://res.cloudinary.com/drlifoeqc/image/upload/w_400,q_auto,f_auto/v1749304333/shirt1-combo-web_bkd6ep.webp" 
+                                 alt="Shirt Design 1 Combination" 
+                                 class="rounded-2xl shadow-lg w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="py-20 bg-gradient-to-br from-purple-600 to-blue-600">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">What's Next?</h2>
+                    <p class="text-xl text-white/90 mb-8">Ready to start your own project?</p>
+                    <a href="../contact.html" class="inline-block bg-white text-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Let's Work Together
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Ramones Capulong</h3>
+                    <p class="text-gray-400">Creative Professional | Graphic Designer | Video Editor</p>
+                </div>
+                <div class="md:text-right">
+                    <nav class="flex flex-wrap gap-6 md:justify-end">
+                        <a href="../index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                        <a href="../about.html" class="text-gray-400 hover:text-white transition-colors">About Me</a>
+                        <a href="../projects.html" class="text-gray-400 hover:text-white transition-colors">Projects</a>
+                        <a href="../contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Ramones Capulong. All rights reserved.</p>
+            </div>
+            <div class="text-center mt-4">
+                <a href="../projects.html" class="text-purple-400 hover:text-purple-300 transition-colors">← Back to Projects</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -25,6 +25,43 @@
         .gallery-image:hover { transform: scale(1.03); }
         .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease forwards; }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            transition: color 0.3s ease;
+        }
+        .lightbox-close:hover {
+            color: #ccc;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
@@ -77,24 +114,45 @@
                 </div>
             </div>
         </section>
+        <!-- Brief Description Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-8 fade-in">
+                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/v1755624362/2_ynrhdg.jpg" alt="Side Kick VA Logo" class="mx-auto h-28 w-28 rounded-full shadow-lg mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">About Side Kick VA</h2>
+                    <p class="text-lg text-gray-600">A modern virtual assistant brand for digital entrepreneurs and busy professionals. Delivered a vibrant, trustworthy identity and engaging Instagram content, including a carousel series, welcome reel, and brand kit to boost engagement and brand recognition.</p>
+                </div>
+            </div>
+        </section>
         <!-- Carousel Gallery Section -->
         <section class="py-20 bg-white">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12 fade-in">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Instagram Carousel Series</h2>
-                    <p class="text-xl text-gray-600">Swipe through the carousel posts designed for Side Kick VA's Instagram campaign.</p>
+                    <p class="text-xl text-gray-600">Swipe or click next to view all images. Click any image to view in full size.</p>
                 </div>
-                <div class="grid md:grid-cols-4 gap-8">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_1.jpg" alt="Side Kick VA Carousel 1" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_2.jpg" alt="Side Kick VA Carousel 2" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_3.jpg" alt="Side Kick VA Carousel 3" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_4.jpg" alt="Side Kick VA Carousel 4" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_5.jpg" alt="Side Kick VA Carousel 5" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_6.jpg" alt="Side Kick VA Carousel 6" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_7.jpg" alt="Side Kick VA Carousel 7" class="rounded-2xl shadow-lg w-full gallery-image" loading="lazy">
+                <div class="relative flex flex-col items-center">
+                    <div class="w-full max-w-2xl overflow-hidden rounded-2xl shadow-lg">
+                        <img id="carousel-image" src="https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_1_dgal6p.jpg" alt="Side Kick VA Carousel 1" class="w-full h-auto gallery-image cursor-pointer" loading="lazy">
+                    </div>
+                    <button id="carousel-next" class="mt-6 px-6 py-3 bg-purple-600 text-white rounded-full font-medium shadow hover:bg-purple-700 transition-colors">Next</button>
+                    <div class="flex gap-2 mt-4">
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="0"></span>
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="1"></span>
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="2"></span>
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="3"></span>
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="4"></span>
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="5"></span>
+                        <span class="carousel-dot w-3 h-3 rounded-full bg-gray-300 inline-block" data-index="6"></span>
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-img" src="" alt="">
+        </div>
         <!-- Welcome Reel Section -->
         <section class="py-20 bg-gray-50">
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -102,8 +160,8 @@
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Welcome Reel</h2>
                     <p class="text-xl text-gray-600 mb-8">A dynamic video introduction for Side Kick VA, crafted to capture attention and communicate value instantly.</p>
                     <div class="aspect-[9/16] bg-gray-100 rounded-2xl overflow-hidden shadow-lg mx-auto max-w-xs">
-                        <video controls class="w-full h-full object-cover" poster="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Carousel_1.jpg">
-                            <source src="https://res.cloudinary.com/drlifoeqc/video/upload/q_auto,f_auto/Elefes_capulong_Welcome%20Reel.mp4" type="video/mp4">
+                        <video controls class="w-full h-full object-cover" poster="https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_1_dgal6p.jpg">
+                            <source src="https://res.cloudinary.com/drlifoeqc/video/upload/v1755623614/Elefes_capulong_Welcome_Reel_cbtxop.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -115,8 +173,8 @@
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div class="fade-in">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Brand Kit</h2>
-                    <p class="text-xl text-gray-600 mb-8">A snapshot of the visual identity and assets for Side Kick VA.</p>
-                    <img src="https://res.cloudinary.com/drlifoeqc/image/upload/q_auto,f_auto/Elefes_Capulong_BrandKit.jpg" alt="Side Kick VA Brand Kit" class="rounded-2xl shadow-lg w-full max-w-lg mx-auto" loading="lazy">
+                    <p class="text-xl text-gray-600 mb-8">A snapshot of the visual identity and assets for Side Kick VA. Click to view in full and zoom.</p>
+                    <img id="brandkit-image" src="https://res.cloudinary.com/drlifoeqc/image/upload/v1755623584/Elefes_Capulong_BrandKit_qslibn.jpg" alt="Side Kick VA Brand Kit" class="rounded-2xl shadow-lg w-full max-w-lg mx-auto cursor-pointer" loading="lazy">
                 </div>
             </div>
         </section>
@@ -156,5 +214,157 @@
         </div>
     </footer>
     <script src="../js/main.js"></script>
+    <script>
+    // Carousel logic
+    const carouselImages = [
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_1_dgal6p.jpg",
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623532/Carousel_2_mqddsy.jpg",
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_3_mmaubb.jpg",
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_4_rjwsdf.jpg",
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_5.png",
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_6_opwegg.jpg",
+        "https://res.cloudinary.com/drlifoeqc/image/upload/v1755623531/Carousel_7_jq2pby.jpg"
+    ];
+    let currentIndex = 0;
+    const carouselImg = document.getElementById('carousel-image');
+    const nextBtn = document.getElementById('carousel-next');
+    const dots = document.querySelectorAll('.carousel-dot');
+    function updateCarousel(index) {
+        carouselImg.src = carouselImages[index];
+        carouselImg.alt = `Side Kick VA Carousel ${index + 1}`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-purple-600', i === index);
+            dot.classList.toggle('bg-gray-300', i !== index);
+        });
+    }
+    nextBtn.addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % carouselImages.length;
+        updateCarousel(currentIndex);
+    });
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            currentIndex = parseInt(this.getAttribute('data-index'));
+            updateCarousel(currentIndex);
+        });
+    });
+    updateCarousel(currentIndex);
+    // Lightbox for carousel and brand kit
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    let isDragging = false;
+    let dragStartX = 0, dragStartY = 0, imgStartLeft = 0, imgStartTop = 0;
+    let zoom = 1;
+
+    function enableDragIfZoomed() {
+        if (zoom > 1) {
+            lightboxImg.style.cursor = 'grab';
+        } else {
+            lightboxImg.style.cursor = 'pointer';
+            lightboxImg.style.left = '';
+            lightboxImg.style.top = '';
+        }
+    }
+
+    carouselImg.addEventListener('click', function() {
+        lightbox.classList.add('active');
+        lightboxImg.src = this.src;
+        lightboxImg.alt = this.alt;
+        zoom = 1;
+        lightboxImg.style.transform = 'scale(1)';
+        lightboxImg.style.left = '';
+        lightboxImg.style.top = '';
+        enableDragIfZoomed();
+        document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('brandkit-image').addEventListener('click', function() {
+        lightbox.classList.add('active');
+        lightboxImg.src = this.src;
+        lightboxImg.alt = this.alt;
+        zoom = 1;
+        lightboxImg.style.transform = 'scale(1)';
+        lightboxImg.style.left = '';
+        lightboxImg.style.top = '';
+        enableDragIfZoomed();
+        document.body.style.overflow = 'hidden';
+    });
+    closeBtn.addEventListener('click', function() {
+        closeLightbox();
+    });
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        zoom = 1;
+        lightboxImg.style.transform = 'scale(1)';
+        lightboxImg.style.left = '';
+        lightboxImg.style.top = '';
+    }
+    // Zoom on lightbox image
+    lightboxImg.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        zoom += e.deltaY * -0.001;
+        zoom = Math.min(Math.max(zoom, 1), 3);
+        lightboxImg.style.transform = `scale(${zoom})`;
+        enableDragIfZoomed();
+        if (zoom === 1) {
+            lightboxImg.style.left = '';
+            lightboxImg.style.top = '';
+        }
+    });
+    lightboxImg.addEventListener('mousedown', function(e) {
+        if (zoom === 1) return;
+        e.preventDefault(); // Prevent default drag behavior
+        isDragging = true;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        imgStartLeft = parseInt(lightboxImg.style.left || 0, 10);
+        imgStartTop = parseInt(lightboxImg.style.top || 0, 10);
+        lightboxImg.style.position = 'relative';
+        lightboxImg.style.cursor = 'grabbing';
+        document.addEventListener('mousemove', onDragMove);
+        document.addEventListener('mouseup', onDragEnd);
+    });
+    lightboxImg.addEventListener('dragstart', function(e) {
+        e.preventDefault(); // Prevent browser's default drag image
+    });
+    function onDragMove(e) {
+        if (!isDragging) return;
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+        lightboxImg.style.left = (imgStartLeft + dx) + 'px';
+        lightboxImg.style.top = (imgStartTop + dy) + 'px';
+    }
+    function onDragEnd() {
+        isDragging = false;
+        lightboxImg.style.cursor = 'grab';
+        document.removeEventListener('mousemove', onDragMove);
+        document.removeEventListener('mouseup', onDragEnd);
+    }
+    lightboxImg.addEventListener('mouseleave', function() {
+        if (isDragging) {
+            isDragging = false;
+            lightboxImg.style.cursor = 'grab';
+            document.removeEventListener('mousemove', onDragMove);
+            document.removeEventListener('mouseup', onDragEnd);
+        }
+    });
+    lightboxImg.addEventListener('mouseup', function() {
+        if (zoom === 1) {
+            lightboxImg.style.left = '';
+            lightboxImg.style.top = '';
+            lightboxImg.style.position = '';
+        }
+    });
+    </script>
 </body>
 </html>
